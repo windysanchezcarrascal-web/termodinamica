@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2">
+<title>Termodinámica · OVA · Grado 11°</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--f:#FF4D00;--f2:#FF8C00;--ic:#00C9FF;--gn:#06D6A0;--pu:#7B2FBE;--ye:#FFD60A;--dk:#0D0D1F;--dk2:#141428;--cd:#1C1C38;--cd2:#232345;--tx:#F0F0FF;--mu:#8888AA;--br:rgba(255,255,255,0.09);--r:12px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;overflow:auto;font-family:'Nunito',sans-serif;background:var(--dk);color:var(--tx);}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 40%,rgba(255,77,0,.06) 0%,transparent 55%),radial-gradient(ellipse at 80% 70%,rgba(0,201,255,.05) 0%,transparent 55%);pointer-events:none;z-index:0;}
+#tb{position:fixed;top:0;left:0;right:0;height:52px;background:rgba(13,13,31,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--br);display:flex;align-items:center;gap:10px;padding:0 14px;z-index:200;}
+#tbt{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;color:var(--f2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px;}
+#po{flex:1;height:5px;background:var(--cd2);border-radius:3px;overflow:hidden;}
+#pi{height:100%;background:linear-gradient(90deg,var(--f),var(--ye));border-radius:3px;transition:width .5s;width:0%;}
+#ptx{font-size:11px;font-weight:800;color:var(--ye);min-width:32px;text-align:right;}
+#mbtn{background:none;border:1px solid var(--br);border-radius:7px;padding:4px 9px;color:var(--mu);font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;}
+#ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:250;display:none;}
+#ov.on{display:block;}
+#sb{position:fixed;top:0;left:-275px;bottom:0;width:260px;background:var(--dk2);border-right:1px solid var(--br);z-index:300;transition:left .3s;overflow-y:auto;padding-bottom:20px;}
+#sb.on{left:0;}
+#sbh{padding:12px 16px;border-bottom:1px solid var(--br);font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;color:var(--f2);display:flex;align-items:center;justify-content:space-between;}
+#csbtn{background:none;border:none;color:var(--mu);font-size:18px;cursor:pointer;}
+.sbg{padding:8px 16px 3px;font-size:9px;font-weight:800;color:var(--mu);letter-spacing:2px;text-transform:uppercase;}
+.sbi{display:flex;align-items:center;gap:8px;padding:7px 16px;cursor:pointer;font-size:11px;font-weight:600;border-left:3px solid transparent;transition:background .15s;}
+.sbi:hover{background:rgba(255,255,255,.04);}
+.sbi.on{background:rgba(255,77,0,.1);border-left-color:var(--f);color:var(--f2);}
+.sbck{font-size:9px;color:var(--gn);margin-left:auto;}
+#sw{position:fixed;top:52px;left:0;right:0;bottom:58px;overflow:auto;}
+.sc{display:none;height:100%;padding:14px 15px 8px;max-width:800px;margin:0 auto;z-index:1;overflow:hidden;flex-direction:column;}
+.sc.on{display:flex;animation:fu .3s ease;}
+@keyframes fu{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+#bn{position:fixed;bottom:0;left:0;right:0;height:58px;background:rgba(13,13,31,.97);backdrop-filter:blur(10px);border-top:1px solid var(--br);display:flex;align-items:center;gap:10px;padding:0 14px;z-index:200;}
+.nb{border-radius:9px;padding:8px 15px;font-size:12px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;border:none;}
+#bpv{background:var(--cd2);color:var(--mu);}
+#bpv:disabled{opacity:.3;cursor:not-allowed;}
+#blb{flex:1;text-align:center;font-size:10px;font-weight:700;color:var(--mu);}
+#bnx{background:linear-gradient(135deg,var(--f),var(--f2));color:#fff;}
+#bnx:disabled{background:var(--cd2);color:var(--mu);cursor:not-allowed;}
+/* CARDS */
+.cc{background:var(--cd);border:1px solid var(--br);border-radius:var(--r);padding:13px;margin-bottom:8px;position:relative;overflow:hidden;flex-shrink:0;}
+.cc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.cf::before{background:linear-gradient(90deg,var(--f),var(--f2));}
+.ci::before{background:linear-gradient(90deg,var(--ic),#0077B6);}
+.cg::before{background:linear-gradient(90deg,var(--gn),#00a86b);}
+.cp::before{background:linear-gradient(90deg,var(--pu),#a855f7);}
+.cy::before{background:linear-gradient(90deg,var(--ye),#f59e0b);}
+.cc h3{font-size:13px;font-weight:800;margin-bottom:5px;}
+.cc p{font-size:12px;color:var(--mu);line-height:1.65;}
+.ex{background:rgba(6,214,160,.07);border-left:3px solid var(--gn);border-radius:0 7px 7px 0;padding:7px 10px;margin-top:6px;font-size:11.5px;color:#99f3dc;line-height:1.6;}
+.wn{background:rgba(255,77,0,.07);border-left:3px solid var(--f);border-radius:0 7px 7px 0;padding:7px 10px;margin-top:6px;font-size:11.5px;color:#ffaa80;line-height:1.6;}
+.hl{background:rgba(255,214,10,.07);border-left:3px solid var(--ye);border-radius:0 7px 7px 0;padding:7px 10px;margin-top:6px;font-size:11.5px;color:#ffe082;line-height:1.6;}
+.ib{background:rgba(0,201,255,.07);border:1px solid rgba(0,201,255,.2);border-radius:10px;padding:10px 12px;font-size:11.5px;color:#99e8ff;line-height:1.6;margin-bottom:8px;flex-shrink:0;}
+.wb{background:rgba(255,214,10,.07);border:1px solid rgba(255,214,10,.2);border-radius:10px;padding:10px 12px;font-size:11.5px;color:#ffe082;line-height:1.6;margin-bottom:8px;flex-shrink:0;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+@media(max-width:500px){.two{grid-template-columns:1fr;}.three{grid-template-columns:1fr 1fr;}}
+.sh{flex-shrink:0;margin-bottom:8px;}
+.stit{font-family:'Orbitron',sans-serif;font-size:clamp(13px,2.4vw,16px);font-weight:700;color:var(--tx);margin-bottom:2px;}
+.ssub{font-size:11px;color:var(--mu);line-height:1.5;}
+.hero{text-align:center;padding:6px 0 10px;flex-shrink:0;}
+.badge{display:inline-block;background:rgba(255,77,0,.2);border:1px solid rgba(255,77,0,.4);color:var(--f2);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;}
+.hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(17px,4vw,28px);font-weight:900;background:linear-gradient(135deg,var(--f),var(--f2),var(--ye));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.15;margin-bottom:6px;}
+.hp{font-size:12px;color:var(--mu);line-height:1.6;max-width:460px;margin:0 auto;}
+.pills{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:8px;}
+.pill{background:var(--cd);border:1px solid var(--br);border-radius:20px;padding:3px 9px;font-size:10px;font-weight:700;color:var(--mu);}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px;margin:8px 0;}
+.mcard{background:var(--cd);border:1px solid var(--br);border-radius:11px;padding:11px;text-align:center;cursor:pointer;transition:all .2s;}
+.mcard:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.15);}
+.mi{font-size:20px;margin-bottom:4px;}.mt{font-size:11px;font-weight:800;margin-bottom:1px;}.mc{font-size:10px;color:var(--mu);}
+.stp{background:var(--cd2);border-radius:10px;padding:9px 12px;display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;flex-shrink:0;}
+.snum{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;}
+.stit2{font-size:12px;font-weight:800;margin-bottom:2px;}
+.sdesc{font-size:11px;color:var(--mu);line-height:1.55;}
+.ctab{width:100%;border-collapse:collapse;font-size:11px;margin:6px 0;}
+.ctab th{background:rgba(0,201,255,.1);padding:6px 8px;text-align:left;font-weight:800;border-bottom:2px solid #0077B6;}
+.ctab td{padding:5px 8px;border-bottom:1px solid var(--br);}
+/* QUIZ */
+.qbox{background:var(--cd2);border:1px solid var(--br);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;flex:1;overflow:hidden;}
+.qhud{display:flex;align-items:center;gap:7px;margin-bottom:9px;flex-shrink:0;}
+.qlv{display:flex;gap:3px;}.qlf{font-size:15px;}.qlf.x{filter:grayscale(1);opacity:.3;}
+.qsc{background:rgba(255,214,10,.15);border:1px solid rgba(255,214,10,.3);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:800;color:var(--ye);}
+.qtm{background:rgba(255,77,0,.15);border:1px solid rgba(255,77,0,.3);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:800;color:var(--f);}
+.qtm.hot{background:rgba(255,77,0,.4);border-color:var(--f);animation:pu .5s infinite;}
+@keyframes pu{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+.qctx{background:rgba(0,201,255,.07);border-left:3px solid var(--ic);border-radius:0 6px 6px 0;padding:7px 10px;font-size:11px;color:#99e8ff;margin-bottom:8px;line-height:1.6;flex-shrink:0;}
+.qnum{font-size:10px;font-weight:800;color:var(--mu);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;}
+.qt{font-size:13px;font-weight:700;line-height:1.5;margin-bottom:9px;flex-shrink:0;}
+.qopts{display:grid;gap:6px;overflow-y:auto;}
+.qopt{background:var(--cd);border:2px solid var(--br);border-radius:9px;padding:9px 11px;font-size:12px;font-weight:600;line-height:1.4;cursor:pointer;text-align:left;color:var(--tx);width:100%;font-family:'Nunito',sans-serif;display:flex;gap:7px;align-items:flex-start;transition:all .15s;}
+.qopt:hover:not(:disabled){background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.18);transform:translateX(2px);}
+.qopt.ok{background:rgba(6,214,160,.18);border-color:var(--gn);color:#99f3dc;}
+.qopt.bad{background:rgba(255,77,0,.18);border-color:var(--f);color:#ffaa99;}
+.qopt:disabled{cursor:not-allowed;}
+.ol{width:20px;height:20px;border-radius:50%;background:var(--cd2);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;flex-shrink:0;}
+.qfb{margin-top:7px;padding:8px 11px;border-radius:8px;font-size:11px;line-height:1.6;display:none;flex-shrink:0;}
+.qfb.on{display:block;}.qfb.ok{background:rgba(6,214,160,.1);border:1px solid var(--gn);color:#99f3dc;}.qfb.bad{background:rgba(255,77,0,.1);border:1px solid var(--f);color:#ffaa99;}
+.qnx{background:linear-gradient(135deg,var(--pu),#a855f7);border:none;border-radius:8px;padding:7px 15px;color:#fff;font-size:11px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:7px;display:none;flex-shrink:0;}
+.qres{text-align:center;padding:14px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;}
+.big{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:900;margin:6px 0 4px;}
+.msg{font-size:12px;color:var(--mu);margin-bottom:12px;}
+.btnr{border:none;border-radius:8px;padding:8px 17px;color:#fff;font-size:12px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin:3px;}
+/* GAME */
+.gw{background:var(--cd);border:2px solid rgba(255,77,0,.3);border-radius:var(--r);padding:12px;position:relative;overflow:hidden;flex:1;display:flex;flex-direction:column;}
+.gw::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--f),var(--f2),var(--ye),var(--f));background-size:200%;animation:gfa 2s linear infinite;}
+@keyframes gfa{0%{background-position:0 0}100%{background-position:200% 0}}
+.gstr{position:absolute;top:9px;right:11px;background:rgba(255,214,10,.15);border:1px solid rgba(255,214,10,.3);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:800;color:var(--ye);}
+/* SIM */
+.simstart{background:linear-gradient(135deg,rgba(255,77,0,.1),rgba(123,47,190,.1));border:1px solid rgba(255,77,0,.25);border-radius:var(--r);padding:18px;text-align:center;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.sbtn{background:linear-gradient(135deg,var(--f),var(--f2));border:none;border-radius:10px;padding:11px 24px;color:#fff;font-size:13px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:10px;}
+/* SCIENTIST */
+.scicard{background:linear-gradient(135deg,var(--cd),var(--cd2));border:1px solid var(--br);border-radius:var(--r);padding:11px;display:flex;gap:11px;align-items:flex-start;margin-bottom:8px;flex-shrink:0;}
+.sciface{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;background:rgba(255,77,0,.15);border:2px solid rgba(255,77,0,.3);}
+.sciname{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;color:var(--f2);margin-bottom:1px;}
+.sciyear{font-size:9px;color:var(--mu);margin-bottom:3px;}
+.scidesc{font-size:11px;color:var(--tx);line-height:1.5;}
+.scidata{font-size:10px;color:var(--gn);margin-top:3px;font-style:italic;}
+/* SVG MAPA Y GRAFICAS */
+.mpwrap{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.mpwrap svg,.gfwrap svg{max-width:100%;max-height:100%;}
+.gfwrap{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+</style>
+</head>
+<body>
+<div id="tb"><div id="tbt">🔥 TERMODINÁMICA</div><div id="po"><div id="pi"></div></div><div id="ptx">0%</div><button id="mbtn" onclick="tSB()">☰ Índice</button></div>
+<div id="ov" onclick="cSB()"></div>
+<div id="sb"><div id="sbh"><span>📋 Contenido</span><button id="csbtn" onclick="cSB()">✕</button></div><div id="sbc"></div></div>
+<div id="sw"><div id="scc"></div></div>
+<div id="bn"><button class="nb" id="bpv" onclick="go(-1)" disabled>← Anterior</button><div id="blb">1 / 63</div><button class="nb" id="bnx" onclick="go(1)">Siguiente →</button></div>
+<script>
+// ── AUDIO ──
+let _ac;
+function AC(){if(!_ac)_ac=new(window.AudioContext||window.webkitAudioContext)();return _ac;}
+function snd(t){try{const a=AC();if(t==='tick'){const o=a.createOscillator(),g=a.createGain();o.connect(g);g.connect(a.destination);o.frequency.value=800;g.gain.setValueAtTime(.07,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.06);o.start();o.stop(a.currentTime+.07);return;}({ok:[523,659,784],bad:[220,180],win:[523,659,784,1047],lose:[300,250,200]}[t]||[440]).forEach((f,i)=>{const o=a.createOscillator(),g=a.createGain();o.connect(g);g.connect(a.destination);o.frequency.value=f;g.gain.setValueAtTime(.18,a.currentTime+i*.12);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+i*.12+.25);o.start(a.currentTime+i*.12);o.stop(a.currentTime+i*.12+.28);});}catch(e){}}
+// ── SHUFFLE ──
+function shuf(a){let r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;}
+function shufQ(qs){return shuf(qs).map(q=>{const ops=q.o.map((t,i)=>({t,c:i===q.a}));const sh=shuf(ops);return{...q,o:sh.map(x=>x.t),a:sh.findIndex(x=>x.c)};});}
+// ── SCREENS ENGINE ──
+const SS=[];let ci=0;
+function addS(id,lb,ic,gr,html,fn){SS.push({id,lb,ic,gr,html,fn:fn||null,done:false});}
+// ── SVG MAPA BUILDER ──
+function mkM(ns,ls){
+  let sl='',sn='',st='';
+  ls.forEach(l=>{const a=ns[l[0]],b=ns[l[1]];sl+=`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>`;});
+  ns.forEach(n=>{
+    const c=n.c||'#232345',bc=n.bc||'rgba(255,255,255,.18)',tc=n.tc||'#F0F0FF',w=n.w||90,fs=n.fs||8.5;
+    sn+=`<rect x="${n.x-w/2}" y="${n.y-14}" width="${w}" height="28" rx="7" fill="${c}" stroke="${bc}" stroke-width="1.5"/>`;
+    const ws=n.t.split('|');
+    if(ws.length===1){st+=`<text x="${n.x}" y="${n.y+4}" text-anchor="middle" fill="${tc}" font-size="${fs}" font-family="Nunito,sans-serif" font-weight="800">${ws[0]}</text>`;}
+    else{st+=`<text x="${n.x}" y="${n.y-2}" text-anchor="middle" fill="${tc}" font-size="${fs-.5}" font-family="Nunito,sans-serif" font-weight="800">${ws[0]}</text><text x="${n.x}" y="${n.y+9}" text-anchor="middle" fill="${tc}" font-size="${fs-.5}" font-family="Nunito,sans-serif" font-weight="800">${ws[1]}</text>`;}
+  });
+  return `<svg viewBox="0 0 400 200" style="width:100%;max-height:100%;" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="200" fill="#141428" rx="10"/>${sl}${sn}${st}</svg>`;
+}
+// ══ PANTALLAS 1-2: INICIO ══
+addS('s01','Bienvenida','🔥','Inicio',`
+<div class="hero">
+  <div class="badge">Física · Grado 11° · Colombia · ICFES</div>
+  <div style="font-size:40px;margin-bottom:7px;">🔥</div>
+  <h1>TERMODINÁMICA</h1>
+  <p class="hp">Aprende con situaciones reales de tu vida cotidiana.<br>Sin fórmulas — solo procesos, comprensión y análisis.</p>
+  <div class="pills"><div class="pill">🏠 Tu hogar</div><div class="pill">🌡️ Tu cuerpo</div><div class="pill">🌿 Tu región</div><div class="pill">🚗 Tu entorno</div></div>
+</div>
+<div class="mgrid">
+  <div class="mcard" onclick="goTo('s03')"><div class="mi">🌡️</div><div class="mt">Tema 1</div><div class="mc">Calor y Temperatura</div></div>
+  <div class="mcard" onclick="goTo('s31')"><div class="mi">⚗️</div><div class="mt">Tema 2</div><div class="mc">Fases de la Materia</div></div>
+  <div class="mcard" onclick="goTo('s50')"><div class="mi">🎮</div><div class="mt">Juego ICFES</div><div class="mc">20 preguntas</div></div>
+  <div class="mcard" onclick="goTo('s51')"><div class="mi">🏆</div><div class="mt">Simulacro</div><div class="mc">Formato Saber 11°</div></div>
+</div>
+<div class="ib">💡 Usa <strong>Siguiente →</strong> para avanzar pantalla a pantalla, o <strong>☰ Índice</strong> para ir directamente a cualquier sección.</div>`);
+
+addS('s02','¿Qué es la Termodinámica?','🌡️','Inicio',`
+<div class="sh"><div class="stit">¿Qué es la Termodinámica?</div><div class="ssub">Presaberes — lo que ya vives sin saber que es física</div></div>
+<div class="ib">🤔 <strong>Piensa en esto:</strong> Cuando tu mamá pone el agua a hervir para el tinto, cuando te duchas con agua tibia, cuando el piso frío de cerámica te despierta al saltar de la cama, cuando el refresco de la nevera se calienta en la mesa... todo eso es termodinámica.</div>
+<div class="two">
+<div class="cc cf"><h3>🔥 ¿Qué estudia?</h3><p>Cómo el <strong>calor</strong> se mueve entre los cuerpos, cómo cambia la <strong>temperatura</strong>, y por qué los materiales cambian de tamaño o estado al calentarse o enfriarse.</p></div>
+<div class="cc ci"><h3>🎯 En el ICFES</h3><p>No te piden hacer cuentas. Te dan una <strong>situación real</strong> y debes <strong>explicar el proceso</strong> físico que ocurre. Eso es exactamente lo que aprenderás aquí.</p></div>
+</div>
+<div class="cc cg"><h3>✦ Lo que aprenderás a explicar con seguridad</h3>
+<div class="ex">¿Por qué el mango de madera de la olla no quema aunque la olla sí esté hirviendo?</div>
+<div class="ex">¿Por qué el sudor refresca el cuerpo aunque el ambiente esté caliente?</div>
+<div class="ex">¿Por qué las llantas del carro tienen más presión al mediodía que en la madrugada?</div>
+<div class="ex">¿Por qué en Bogotá la comida tarda más en cocinarse que en Barranquilla?</div></div>`);
+
+// ══ PANTALLAS 3-8: CALOR Y TEMPERATURA ══
+addS('s03','Calor y Temperatura','🌡️','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">Calor y Temperatura</div><div class="ssub">¿Son lo mismo? Se usan igual en el lenguaje diario, pero en física son conceptos completamente distintos</div></div>
+<div class="two">
+<div class="cc cf"><h3>🌡️ Temperatura</h3><p>Es la medida de qué tan agitadas están las moléculas de un cuerpo. A mayor agitación molecular → mayor temperatura. No es la cantidad de calor que tiene un cuerpo — es su estado de agitación.</p>
+<div class="ex">🏠 El termómetro bajo tu axila mide la agitación de las moléculas de tu cuerpo. Fiebre = moléculas vibrando más rápido de lo normal.</div>
+<div class="ex">🌡️ "Cúcuta, 38°C hoy" — el noticiero reporta la agitación de las moléculas del aire en esa ciudad.</div></div>
+<div class="cc ci"><h3>🔥 Calor</h3><p>Es energía que se está <strong>moviendo</strong> de un cuerpo a otro. Siempre viaja del cuerpo de mayor temperatura al de menor. Nunca al revés por sí solo.</p>
+<div class="ex">🏠 Al tocar la estufa caliente, el calor viaja de la estufa (alta T) hacia tu mano (menor T). Por eso sientes calor.</div>
+<div class="ex">🧊 Al tocar hielo, el calor de tu mano (37°C) viaja hacia el hielo (0°C). Tu mano pierde calor — por eso se siente fría.</div>
+<div class="ex">☕ El tinto caliente en la mesa cede calor al ambiente hasta que ambos quedan a la misma temperatura.</div></div>
+</div>
+<div class="wb">⚠️ <strong>Error muy común:</strong> "El frío del hielo pasó al agua caliente." Eso es incorrecto. El <strong>frío no fluye</strong>. Lo que fluye siempre es el <strong>calor</strong>, del cuerpo caliente al frío. El hielo no manda frío — recibe calor del agua.</div>`);
+
+addS('s04','Calor y Temperatura — análisis','🌡️','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">Calor y Temperatura — análisis profundo</div><div class="ssub">Situaciones que generan confusión y cómo entenderlas correctamente</div></div>
+<div class="cc cp"><h3>🤝 El equilibrio térmico</h3><p>Cuando dos cuerpos con diferente temperatura se tocan, el calor fluye del más caliente al más frío hasta que <strong>ambos quedan a la misma temperatura</strong>. Ese estado se llama equilibrio térmico y el flujo de calor se detiene.</p>
+<div class="ex">🥤 Refresco de la nevera (4°C) en la mesa (26°C): el calor del ambiente pasa al refresco hasta que ambos están a 26°C — equilibrio térmico. Por eso ya no está frío.</div>
+<div class="ex">🚿 Mezclas agua caliente y fría para ducharte: el calor del agua caliente pasa a la fría hasta que toda queda a la misma temperatura.</div></div>
+<div class="cc cy"><h3>🔍 ¿Por qué el metal se siente más frío que la madera a igual temperatura?</h3><p>Una cuchara de metal y un mango de madera llevan toda la noche en el mismo cajón — exactamente a la misma temperatura. Al tocarlos, el metal se siente mucho más frío.</p>
+<div class="hl">El metal es buen conductor — extrae calor de tu mano muy rápidamente. Esa pérdida veloz de calor es lo que tu cerebro interpreta como "frío intenso". La madera conduce mal — extrae calor despacio, por eso se siente tibio. Misma temperatura, diferente conductividad.</div>
+<div class="ex">🏠 Por eso los mangos de ollas son de madera o plástico: no están más fríos que el metal — simplemente no transmiten el calor de la olla hacia tu mano tan rápido.</div></div>
+<div class="cc cg"><h3>🌡️ Cómo funciona el termómetro</h3><p>Al ponerlo bajo el brazo, el termómetro y el cuerpo intercambian calor hasta el equilibrio térmico. Cuando el mercurio deja de subir, ambos están a la misma temperatura — en ese punto la lectura es exacta.</p>
+<div class="ex">🏠 Por eso hay que esperar al menos 3 minutos. Antes de ese punto el termómetro aún está alcanzando el equilibrio — la lectura sería incorrecta.</div></div>`);
+
+addS('s05','Las escalas de temperatura','📊','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">Las escalas de temperatura</div><div class="ssub">Tres formas de medir la misma temperatura — cada una con su propio contexto de uso</div></div>
+<div class="three">
+<div class="cc cf" style="padding:10px;"><h3 style="font-size:12px;">°C · Celsius</h3><p style="font-size:11px;">La de la vida cotidiana en Colombia. Agua congela a <strong>0°C</strong> y hierve a <strong>100°C</strong>.</p><div class="ex" style="font-size:10.5px;">Termómetro médico, noticiero del clima, horno de cocina.</div></div>
+<div class="cc cp" style="padding:10px;"><h3 style="font-size:12px;">K · Kelvin</h3><p style="font-size:11px;">La escala científica. Empieza en el cero absoluto — las moléculas dejan de moverse. 0°C = 273 K.</p><div class="ex" style="font-size:10.5px;">Laboratorios, astronomía, física avanzada.</div></div>
+<div class="cc ci" style="padding:10px;"><h3 style="font-size:12px;">°F · Fahrenheit</h3><p style="font-size:11px;">Usada en EE.UU. Agua congela a <strong>32°F</strong> y hierve a <strong>212°F</strong>.</p><div class="ex" style="font-size:10.5px;">Recetas americanas: 375°F ≈ 190°C en tu horno.</div></div>
+</div>
+<div class="gfwrap" style="flex:1;">
+<svg viewBox="0 0 420 205" style="width:100%;max-height:100%;" xmlns="http://www.w3.org/2000/svg">
+<rect width="420" height="205" fill="#141428" rx="10"/>
+<rect x="197" y="16" width="22" height="160" rx="11" fill="#232345" stroke="#00C9FF" stroke-width="1.5"/>
+<rect x="203" y="74" width="10" height="102" rx="5" fill="#FF4400"/>
+<circle cx="208" cy="188" r="13" fill="#CC2200"/><circle cx="208" cy="188" r="9" fill="#FF4400" opacity=".8"/>
+<line x1="219" y1="26" x2="227" y2="26" stroke="#FF8C00" stroke-width="1.5"/><text x="230" y="30" fill="#FF8C00" font-size="9" font-family="Nunito,sans-serif" font-weight="800">100°C · Ebullición agua</text>
+<line x1="219" y1="74" x2="225" y2="74" stroke="#FFD60A" stroke-width="1.5"/><text x="228" y="78" fill="#FFD60A" font-size="9" font-family="Nunito,sans-serif">37°C · Temperatura corporal</text>
+<line x1="219" y1="126" x2="227" y2="126" stroke="#00C9FF" stroke-width="1.5"/><text x="230" y="130" fill="#00C9FF" font-size="9" font-family="Nunito,sans-serif" font-weight="800">0°C · Fusión del agua</text>
+<line x1="219" y1="160" x2="225" y2="160" stroke="#85B7EB" stroke-width="1"/><text x="228" y="164" fill="#85B7EB" font-size="8" font-family="Nunito,sans-serif">−18°C · Congelador típico</text>
+<line x1="197" y1="26" x2="189" y2="26" stroke="#7B2FBE" stroke-width="1.5"/><text x="186" y="30" fill="#a855f7" font-size="9" font-family="Nunito,sans-serif" font-weight="800" text-anchor="end">373 K</text>
+<line x1="197" y1="74" x2="191" y2="74" stroke="#7B2FBE" stroke-width="1"/><text x="188" y="78" fill="#a855f7" font-size="8" font-family="Nunito,sans-serif" text-anchor="end">310 K</text>
+<line x1="197" y1="126" x2="189" y2="126" stroke="#7B2FBE" stroke-width="1.5"/><text x="186" y="130" fill="#a855f7" font-size="9" font-family="Nunito,sans-serif" font-weight="800" text-anchor="end">273 K</text>
+<rect x="4" y="20" width="52" height="14" rx="4" fill="rgba(0,201,255,.15)" stroke="rgba(0,201,255,.3)" stroke-width="1"/>
+<text x="30" y="31" text-anchor="middle" fill="#00C9FF" font-size="9" font-family="Nunito,sans-serif" font-weight="800">212 °F</text>
+<rect x="4" y="68" width="52" height="14" rx="4" fill="rgba(255,214,10,.15)" stroke="rgba(255,214,10,.3)" stroke-width="1"/>
+<text x="30" y="79" text-anchor="middle" fill="#FFD60A" font-size="9" font-family="Nunito,sans-serif" font-weight="800">98.6 °F</text>
+<rect x="4" y="120" width="52" height="14" rx="4" fill="rgba(0,201,255,.1)" stroke="rgba(0,201,255,.2)" stroke-width="1"/>
+<text x="30" y="131" text-anchor="middle" fill="#99e8ff" font-size="9" font-family="Nunito,sans-serif" font-weight="800">32 °F</text>
+<line x1="56" y1="27" x2="197" y2="27" stroke="rgba(255,140,0,.25)" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="56" y1="75" x2="197" y2="75" stroke="rgba(255,214,10,.25)" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="56" y1="127" x2="197" y2="127" stroke="rgba(0,201,255,.25)" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="208" y="200" text-anchor="middle" fill="#8888AA" font-size="8" font-family="Nunito,sans-serif">K = °C + 273 · A −40° Celsius y Fahrenheit coinciden</text>
+</svg>
+</div>`);
+
+addS('s06','Mapa — Calor y Temperatura','🗺️','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">Mapa conceptual — Calor y Temperatura</div><div class="ssub">Relaciones entre los conceptos del tema</div></div>
+<div class="mpwrap">${mkM(
+[{x:200,y:28,w:115,t:'Calor y|Temperatura',c:'rgba(255,77,0,.3)',bc:'#FF4D00',tc:'#FF8C00'},
+ {x:75,y:95,w:85,t:'Temperatura',c:'rgba(0,201,255,.2)',bc:'#00C9FF',tc:'#99e8ff'},
+ {x:200,y:95,w:75,t:'Calor (Q)',c:'rgba(255,77,0,.2)',bc:'#FF8C00',tc:'#ffcc99'},
+ {x:330,y:95,w:85,t:'Escalas C·K·F',c:'rgba(123,47,190,.2)',bc:'#7B2FBE',tc:'#c084fc'},
+ {x:75,y:168,w:100,t:'Agitación|molecular',c:'rgba(6,214,160,.15)',bc:'#06D6A0',tc:'#99f3dc'},
+ {x:200,y:168,w:100,t:'Equilibrio|térmico',c:'rgba(255,214,10,.15)',bc:'#FFD60A',tc:'#ffe082'},
+ {x:330,y:168,w:95,t:'Fluye|caliente→frío',c:'rgba(255,140,0,.18)',bc:'#FF8C00',tc:'#ffcc99'}],
+[[0,1],[0,2],[0,3],[1,4],[2,5],[2,6],[1,2]]
+)}</div>
+<div class="ib" style="margin-top:8px;flex-shrink:0;">💡 Repasa este mapa antes del test. Identifica qué es temperatura (estado), qué es calor (energía en movimiento), y en qué dirección fluye siempre el calor.</div>`);
+// ══ PANTALLAS 9-13: CALOR ESPECÍFICO ══
+addS('s09','¿Cómo el calor cambia la temperatura?','🌡️','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">¿Cómo el calor cambia la temperatura?</div><div class="ssub">La misma cantidad de calor puede calentar muy diferente según el material y la cantidad</div></div>
+<div class="cc cf"><h3>🔬 La relación fundamental — sin fórmula</h3><p>Cuando le das calor a una sustancia, su temperatura sube. Pero la cantidad de calor necesaria depende de dos factores: <strong>cuánto material hay</strong> (la masa) y <strong>qué tipo de material es</strong> (su "resistencia" a calentarse, llamada calor específico).</p>
+<div class="hl">✦ <strong>Más masa → más calor necesario</strong> para la misma subida de temperatura.<br>✦ <strong>Mayor calor específico → más difícil de calentar</strong>: necesita mucho calor para subir poco la temperatura.</div></div>
+<div class="two">
+<div class="cc ci"><h3>💧 El agua — difícil de calentar</h3><p style="font-size:11.5px;">El agua tiene calor específico muy alto — necesita muchísimo calor para subir su temperatura. Eso también significa que es difícil de enfriar.</p>
+<div class="ex">🏠 Una olla grande de agua tarda mucho más en hervir que una pequeña con el mismo fogón — más masa, más calor necesario.</div>
+<div class="ex">🍳 Una sartén de hierro vacía se calienta en segundos con el fogón. Una olla llena de agua con el mismo fogón tarda minutos. El hierro tiene calor específico mucho más bajo que el agua.</div></div>
+<div class="cc cg"><h3>🔩 Los metales — fáciles de calentar</h3><p style="font-size:11.5px;">Los metales tienen calor específico muy bajo — se calientan rápido con poco calor y se enfrían rápido también.</p>
+<div class="ex">☕ Un pocillo de tinto en metal se enfría mucho más rápido que en cerámica, aunque los dos tengan el mismo café a la misma temperatura. El metal transfiere calor al ambiente más velozmente.</div>
+<div class="ex">⚠️ Las sartenes vacías en el fogón se calientan peligrosamente rápido. No las dejes solas en el fuego — su bajo calor específico hace que suban de temperatura muy rápido.</div></div>
+</div>`);
+
+addS('s10','El calor específico en el entorno regional','🌡️','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">El calor específico en tu entorno</div><div class="ssub">Cómo esta propiedad explica fenómenos del norte de Santander y Colombia</div></div>
+<div class="cc cy"><h3>🌊 Los ríos regulan el clima regional</h3><p>El río Zulia, el Pamplonita, el Catatumbo — todos los ríos y cuerpos de agua tienen un efecto regulador sobre el clima local, gracias al alto calor específico del agua.</p>
+<div class="ex">🌿 En los días más calurosos los ríos absorben calor del ambiente sin calentarse demasiado. En noches frías lo liberan lentamente, manteniendo más tibio el entorno. Por eso cerca de los ríos el clima es diferente que lejos de ellos.</div></div>
+<div class="cc cf"><h3>🏖️ La playa: arena vs mar con el mismo sol</h3><p>La arena quema los pies al mediodía pero el mar está fresco, aunque los dos recibieron el mismo sol toda la mañana.</p>
+<div class="hl">La arena tiene calor específico bajo — sube mucho de temperatura con poco calor. El agua del mar tiene calor específico alto — necesita mucho más calor para subir apenas un grado. Por eso la arena quema y el mar está fresco.</div></div>
+<div class="cc ci"><h3>🧍 El cuerpo humano y el agua</h3><p>El cuerpo humano es aproximadamente 60% agua. Eso tiene una ventaja enorme: nuestra temperatura corporal es muy estable precisamente porque el agua resiste los cambios de temperatura.</p>
+<div class="ex">🏃 Después de hacer ejercicio bajo el sol de Cúcuta, el cuerpo puede acumular mucho calor sin que la temperatura suba dramáticamente — el agua de los tejidos "absorbe" ese calor. El mecanismo del sudor luego descarga ese calor acumulado.</div></div>`);
+
+addS('s11','Mapa — Calor y variación de temperatura','🗺️','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">Mapa conceptual — Calor y variación de temperatura</div><div class="ssub">Relaciones entre los conceptos del tema</div></div>
+<div class="mpwrap">${mkM(
+[{x:200,y:26,w:75,t:'Calor (Q)',c:'rgba(255,77,0,.3)',bc:'#FF4D00',tc:'#FF8C00'},
+ {x:75,y:95,w:65,t:'Masa (m)',c:'rgba(0,201,255,.2)',bc:'#00C9FF',tc:'#99e8ff'},
+ {x:200,y:95,w:95,t:'Calor específico',c:'rgba(255,214,10,.2)',bc:'#FFD60A',tc:'#ffe082'},
+ {x:330,y:95,w:85,t:'Tipo material',c:'rgba(6,214,160,.2)',bc:'#06D6A0',tc:'#99f3dc'},
+ {x:200,y:168,w:110,t:'Variación de|temperatura',c:'rgba(123,47,190,.2)',bc:'#7B2FBE',tc:'#c084fc'},
+ {x:60,y:168,w:80,t:'Agua: alto|calor esp.',c:'rgba(0,201,255,.12)',bc:'rgba(0,201,255,.3)',tc:'#99e8ff',fs:8},
+ {x:345,y:168,w:80,t:'Metal: bajo|calor esp.',c:'rgba(255,77,0,.12)',bc:'rgba(255,77,0,.3)',tc:'#ffaa80',fs:8}],
+[[0,1],[0,2],[2,3],[1,4],[3,4],[0,4],[2,5],[3,6]]
+)}</div>
+<div class="ib" style="margin-top:8px;flex-shrink:0;">💡 El calor específico determina cuánto sube la temperatura con la misma energía. Alto = difícil de calentar (agua). Bajo = se calienta fácil (metales).</div>`);
+
+// ══ PANTALLAS 14-18: EQUILIBRIO TÉRMICO ══
+addS('s14','El equilibrio térmico — proceso','🌡️','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">El equilibrio térmico</div><div class="ssub">El proceso natural que ocurre cada vez que dos cuerpos a diferente temperatura se ponen en contacto</div></div>
+<div class="stp"><div class="snum" style="background:rgba(255,77,0,.3);color:var(--f);">1</div><div><div class="stit2">El calor empieza a fluir inmediatamente</div><div class="sdesc">En el instante en que los dos cuerpos se tocan, el calor fluye del de mayor temperatura al de menor. Esto ocurre siempre, sin excepción — es una ley de la naturaleza.</div></div></div>
+<div class="stp"><div class="snum" style="background:rgba(255,140,0,.3);color:var(--f2);">2</div><div><div class="stit2">Las temperaturas se van igualando</div><div class="sdesc">El cuerpo caliente pierde temperatura mientras cede calor. El cuerpo frío gana temperatura mientras recibe calor. El proceso continúa mientras haya diferencia de temperatura entre ellos.</div></div></div>
+<div class="stp"><div class="snum" style="background:rgba(6,214,160,.3);color:var(--gn);">3</div><div><div class="stit2">Equilibrio térmico — el flujo se detiene</div><div class="sdesc">Cuando ambos cuerpos alcanzan la misma temperatura, el flujo de calor se detiene completamente. No hay diferencia de temperatura que lo impulse. A ese estado final se le llama equilibrio térmico.</div></div></div>
+<div class="ib">🌡️ <strong>El termómetro funciona exactamente así:</strong> Al ponerlo bajo el brazo, el termómetro (frío) y el cuerpo (37°C) intercambian calor. Cuando el mercurio deja de subir, alcanzaron el equilibrio térmico. En ese punto el termómetro marca la temperatura exacta del cuerpo.
+<br><br>⏱️ Por eso hay que esperar 3 minutos. Antes de ese punto el termómetro aún está ganando temperatura — la lectura sería menor que la real.</div>`);
+
+addS('s15','El equilibrio térmico — ejemplos','🌡️','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">El equilibrio térmico en tu vida cotidiana</div><div class="ssub">Cuatro situaciones que ocurren todos los días</div></div>
+<div class="cc cg"><h3>📍 La ducha tibia</h3><p>Mezclas agua caliente del calentador (60°C) con agua fría de la llave (18°C). El calor del agua caliente pasa a la fría hasta que toda queda a la misma temperatura.</p>
+<div class="ex">🚿 Si pones más agua caliente que fría, el equilibrio estará más cerca de 60°C. Si son cantidades iguales, será el promedio de las dos. Así controlas la temperatura de la ducha mezclando las dos llaves.</div></div>
+<div class="cc cf"><h3>📍 La fiebre y el paño frío</h3><p>Alguien tiene fiebre de 39°C. El paño húmedo frío en la frente extrae calor del cuerpo por dos mecanismos simultáneos.</p>
+<div class="ex">🤒 El paño frío absorbe calor del cuerpo por equilibrio térmico (conducción). Además, el agua del paño al evaporarse absorbe calor latente adicional de la piel. Los dos efectos juntos bajan la temperatura mejor que un paño seco.</div></div>
+<div class="cc ci"><h3>📍 La taza de café fría</h3><p>Si echas café caliente en una taza fría, el café cede calor a la taza y se enfría más rápido que si la echaras en una taza ya caliente.</p>
+<div class="ex">☕ Los buenos cafeteros calientan la taza antes de servir el espresso: así la taza no "roba" calor al café por equilibrio térmico, y llega más caliente al cliente.</div></div>
+<div class="cc cy"><h3>📍 La nevera abierta</h3><p>Cuando dejas la nevera abierta, el aire caliente de la cocina y el aire frío del interior intercambian calor — el interior se calienta.</p>
+<div class="ex">🏠 Cada segundo que la nevera está abierta entra calor del ambiente. El compresor tiene que trabajar mucho más para recuperar la temperatura baja. Por eso nunca debes dejar la nevera abierta mientras decides qué comer.</div></div>`);
+
+addS('s16','Mapa — Equilibrio térmico','🗺️','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">Mapa conceptual — El equilibrio térmico</div><div class="ssub">Relaciones entre los conceptos del tema</div></div>
+<div class="mpwrap">${mkM(
+[{x:200,y:26,w:110,t:'Equilibrio|térmico',c:'rgba(123,47,190,.3)',bc:'#7B2FBE',tc:'#c084fc'},
+ {x:75,y:95,w:85,t:'Contacto|térmico',c:'rgba(0,201,255,.2)',bc:'#00C9FF',tc:'#99e8ff'},
+ {x:200,y:95,w:80,t:'Flujo calor',c:'rgba(255,77,0,.2)',bc:'#FF4D00',tc:'#ffaa80'},
+ {x:325,y:95,w:90,t:'T igual →|flujo para',c:'rgba(6,214,160,.2)',bc:'#06D6A0',tc:'#99f3dc'},
+ {x:75,y:168,w:95,t:'Caliente→frío|siempre',c:'rgba(255,140,0,.15)',bc:'#FF8C00',tc:'#ffcc99',fs:8},
+ {x:200,y:168,w:85,t:'El termómetro',c:'rgba(255,214,10,.15)',bc:'#FFD60A',tc:'#ffe082'},
+ {x:330,y:168,w:80,t:'Ducha tibia|nevera',c:'rgba(123,47,190,.12)',bc:'rgba(123,47,190,.3)',tc:'#c084fc',fs:8}],
+[[0,1],[0,2],[0,3],[1,2],[2,3],[2,4],[3,5],[3,6]]
+)}</div>
+<div class="ib" style="margin-top:8px;flex-shrink:0;">💡 El equilibrio térmico es inevitable: cuando dos cuerpos a diferente temperatura se tocan, el calor fluye hasta que ambos quedan a la misma temperatura.</div>`);
+
+// ══ PANTALLAS 19-24: TRANSMISIÓN ══
+addS('s19','Conducción del calor','↔️','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">Conducción del calor</div><div class="ssub">El calor viaja de molécula en molécula — sin que la materia se desplace</div></div>
+<div class="cc cf"><h3>🔗 ¿Cómo funciona?</h3><p>En sólidos, las moléculas están fijas pero vibran. Cuando una zona se calienta, vibra con más fuerza y "contagia" esa vibración a las vecinas. El calor viaja de molécula en molécula hacia zonas más frías, <strong>sin que ninguna molécula se desplace de su lugar</strong>.</p>
+<div class="wn">⚠️ <strong>Conductores vs aislantes:</strong> Metales = buenos conductores (calor viaja rápido). Madera, plástico, corcho, aire = aislantes (calor viaja muy lento). Los aislantes no bloquean el calor — lo retrasan.</div></div>
+<div class="cc cy"><h3>📍 Cuatro ejemplos en tu hogar</h3>
+<div class="ex">1️⃣ <strong>El mango de la olla:</strong> La olla hierve pero el mango de madera no quema. La madera conduce el calor lentísimamente. Por eso los mangos son de madera o plástico, nunca de metal.</div>
+<div class="ex">2️⃣ <strong>La cuchara en la sopa:</strong> Dejas una cuchara de metal en la sopa caliente 2 minutos. El mango se calienta aunque no esté sumergido — el calor viajó por todo el metal desde la punta hasta el mango.</div>
+<div class="ex">3️⃣ <strong>El piso de cerámica en la mañana:</strong> La cerámica está a la misma temperatura que la alfombra del cuarto, pero se siente mucho más fría. La cerámica conduce el calor de tus pies hacia el suelo muy rápido — esa pérdida veloz se siente como frío intenso.</div>
+<div class="ex">4️⃣ <strong>El termo con periódico:</strong> Envolver el termo con papel periódico lo mantiene caliente más tiempo. El papel es mal conductor — crea una barrera que retarda la conducción del calor hacia el aire frío exterior.</div></div>`);
+
+addS('s20','Convección del calor','↔️','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">Convección del calor</div><div class="ssub">El calor viaja junto con el movimiento del fluido — aquí la materia sí se desplaza</div></div>
+<div class="cc ci"><h3>🌊 ¿Cómo funciona?</h3><p>En líquidos y gases, cuando una parte se calienta, se vuelve <strong>menos densa</strong> (más liviana) y sube. La parte más fría, más densa, baja a reemplazarla. Se forman corrientes circulares que distribuyen el calor. A diferencia de la conducción, aquí <strong>la materia misma se desplaza</strong>.</p></div>
+<div class="cc cg"><h3>📍 Cuatro ejemplos</h3>
+<div class="ex">1️⃣ <strong>El agua hirviendo en la olla:</strong> El agua del fondo se calienta, sube. El agua fría de arriba baja. Corrientes circulares distribuyen el calor uniformemente — por eso el agua hierve en toda la olla, no solo en el fondo.</div>
+<div class="ex">2️⃣ <strong>Las brisas de Cúcuta:</strong> En tardes calurosas, el aire sobre el asfalto y los techos se calienta, se vuelve liviano y sube. El aire más fresco de parques y zonas verdes baja a reemplazarlo. Así se generan las brisas locales.</div>
+<div class="ex">3️⃣ <strong>El globo aerostático:</strong> El quemador calienta el aire dentro del globo. Ese aire caliente es menos denso que el exterior — el globo flota. Si se apaga el quemador, el aire se enfría, se vuelve más denso y el globo desciende.</div>
+<div class="ex">4️⃣ <strong>La nevera abierta:</strong> Al abrir la nevera, el aire frío del interior cae al suelo (más denso) y el aire caliente de la cocina entra por arriba. Corrientes de convección que calientan el interior y hacen trabajar más al compresor.</div></div>`);
+
+addS('s21','Radiación del calor','↔️','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">Radiación del calor</div><div class="ssub">El calor viaja en forma de ondas — sin necesitar ningún material entre los dos cuerpos</div></div>
+<div class="cc cy"><h3>☀️ ¿Cómo funciona?</h3><p>Cualquier cuerpo con temperatura emite ondas electromagnéticas (principalmente infrarrojas) en todas las direcciones. Estas ondas pueden atravesar el vacío total. <strong>No necesitan ningún material</strong> para propagarse.</p>
+<div class="ex">🌌 El Sol está a 150 millones de km. Entre él y la Tierra hay vacío absoluto. Sin embargo su calor llega. Eso solo es posible por radiación. La conducción y la convección son imposibles en el vacío.</div></div>
+<div class="cc cf"><h3>📍 Cuatro ejemplos</h3>
+<div class="ex">1️⃣ <strong>La fogata en el patio:</strong> A 2 metros sientes calor intenso en la cara aunque no haya viento. Las ondas infrarrojas viajan en línea recta hasta tu piel sin necesitar el aire. Si pones un cartón entre tú y la fogata, el calor disminuye porque bloquea esas ondas.</div>
+<div class="ex">2️⃣ <strong>El asfalto caliente sin tocarlo:</strong> Caminando cerca del asfalto en un día soleado, sientes calor en las piernas aunque no lo estés pisando. El asfalto re-emite la radiación solar hacia todo lo que está alrededor.</div>
+<div class="ex">3️⃣ <strong>La plancha de ropa:</strong> Acercas la mano sin tocarla y ya sientes el calor intenso. Las ondas infrarrojas llegan a tu piel antes de que la toques. Por eso es peligroso acercar la mano para "verificar" si está caliente.</div>
+<div class="ex">4️⃣ <strong>El microondas:</strong> Calienta los alimentos con ondas electromagnéticas que penetran directamente el alimento. Por eso el interior del microondas no se calienta pero el alimento sí — las ondas calientan el agua dentro del alimento directamente.</div></div>`);
+
+addS('s22','Mapa — Transmisión del calor','🗺️','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">Mapa conceptual — Transmisión del calor</div><div class="ssub">Los tres mecanismos con sus condiciones clave</div></div>
+<div class="mpwrap">${mkM(
+[{x:200,y:25,w:115,t:'Transmisión|del calor',c:'rgba(255,77,0,.3)',bc:'#FF4D00',tc:'#FF8C00'},
+ {x:68,y:92,w:78,t:'Conducción',c:'rgba(0,201,255,.2)',bc:'#00C9FF',tc:'#99e8ff'},
+ {x:200,y:92,w:78,t:'Convección',c:'rgba(6,214,160,.2)',bc:'#06D6A0',tc:'#99f3dc'},
+ {x:332,y:92,w:78,t:'Radiación',c:'rgba(255,214,10,.2)',bc:'#FFD60A',tc:'#ffe082'},
+ {x:68,y:168,w:90,t:'Sólidos|sin mover',c:'rgba(0,201,255,.1)',bc:'rgba(0,201,255,.3)',tc:'#99e8ff',fs:8},
+ {x:200,y:168,w:90,t:'Fluidos|moviéndose',c:'rgba(6,214,160,.1)',bc:'rgba(6,214,160,.3)',tc:'#99f3dc',fs:8},
+ {x:332,y:168,w:90,t:'Sin materia|vacío OK',c:'rgba(255,214,10,.1)',bc:'rgba(255,214,10,.3)',tc:'#ffe082',fs:8}],
+[[0,1],[0,2],[0,3],[1,4],[2,5],[3,6]]
+)}</div>
+<div class="ib" style="margin-top:8px;flex-shrink:0;">💡 En el sancocho: el fogón calienta la olla por <em>conducción</em>, el agua distribuye el calor sola por <em>convección</em>, y sientes el calor en la cara por <em>radiación</em> — los tres al mismo tiempo.</div>`);
+
+// ══ PANTALLAS 25-30: DILATACIÓN ══
+addS('s25','Dilatación lineal y superficial','📏','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">La dilatación lineal y superficial</div><div class="ssub">Al calentarse, todos los materiales necesitan más espacio. Al enfriarse, se contraen.</div></div>
+<div class="cc cg"><h3>📏 ¿Qué es la dilatación?</h3><p>Cuando un material se calienta, sus moléculas vibran con más fuerza y se separan un poco más — el material se expande. Al enfriarse, las moléculas se acercan y el material se contrae. Ocurre en <strong>todos los materiales</strong>: sólidos, líquidos y gases.</p></div>
+<div class="two">
+<div class="cc cf"><h3>📐 Dilatación lineal</h3><p style="font-size:11.5px;">Un objeto se dilata principalmente en su <strong>longitud</strong>. Aplica a varillas, rieles, cables.</p>
+<div class="ex">🌉 Los rieles de tren tienen espacios entre segmentos. En verano el metal se calienta y se dilata varios mm. Sin esos espacios (juntas de dilatación), los rieles se doblarían o romperían.</div>
+<div class="ex">⚡ Los cables eléctricos se instalan deliberadamente flojos. En invierno el metal se contrae y el cable se acorta. Si estuviera tenso, la contracción lo rompería o derribaría el poste.</div>
+<div class="ex">🌡️ El mercurio en el termómetro se dilata en la columna del tubo. Como el tubo es muy delgado, una pequeña dilatación produce un gran cambio visible en la altura.</div></div>
+<div class="cc ci"><h3>🔲 Dilatación superficial</h3><p style="font-size:11.5px;">Una lámina crece en <strong>largo y ancho</strong> al calentarse.</p>
+<div class="ex">🚪 Las puertas de madera quedan apretadas en épocas de lluvia. La madera absorbe humedad y se dilata en todas sus dimensiones — incluyendo el ancho del marco. Por eso queda atascada.</div>
+<div class="ex">🏗️ Los techos de lámina metálica no se sueldan entre sí — se solapan. Eso permite que cada lámina se dilate libremente con el calor del mediodía sin deformar a las vecinas.</div>
+<div class="ex">🔧 La tapa metálica del frasco de mermelada muy apretada: 10 segundos bajo agua caliente. El metal se dilata más rápido que el vidrio — el diámetro interior aumenta y la rosca se afloja.</div></div>
+</div>`);
+
+addS('s26','Dilatación volumétrica y anomalía del agua','📏','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">Dilatación volumétrica y anomalía del agua</div><div class="ssub">Los gases se dilatan mucho más. Y el agua tiene un comportamiento único que hace posible la vida.</div></div>
+<div class="cc cp"><h3>📦 Dilatación volumétrica</h3><p>Un cuerpo crece en sus <strong>tres dimensiones</strong> a la vez. Los gases se dilatan muchísimo más que los líquidos, y los líquidos más que los sólidos con el mismo cambio de temperatura.</p>
+<div class="ex">🚗 Las llantas del carro: las verificas en la madrugada y están al nivel correcto. A las 2 pm bajo el sol de Cúcuta, el manómetro muestra presión más alta sin que nadie las inflara. El aire dentro se dilató con el calor y empuja más fuerte las paredes. Siempre verifica la presión en frío.</div>
+<div class="ex">🏗️ El pavimento sin juntas de dilatación en un día muy caluroso se "abomba". El asfalto se calentó, se dilató, y sin espacio para expandirse horizontalmente, se deformó hacia arriba.</div>
+<div class="ex">🍶 Nunca llenes completamente una botella de vidrio con agua y la congeles. El agua al congelarse se expande y esa fuerza puede romper el vidrio. Siempre deja espacio.</div></div>
+<div class="cc cf"><h3>❄️ La anomalía del agua</h3><p>Entre 0°C y 4°C el agua hace algo único: en lugar de dilatarse al calentarse, <strong>se contrae</strong>. A 4°C tiene su mayor densidad. Por eso el hielo es menos denso que el agua líquida y <strong>flota</strong>.</p>
+<div class="hl">Si el hielo se hundiera (como casi todo lo demás al solidificarse), los lagos se congelarían completamente de fondo a superficie en invierno. Sin agua líquida, los peces y organismos acuáticos morirían. El hielo que flota crea una capa aislante que protege el agua de abajo — donde la vida continúa.</div>
+<div class="ex">🌊 En los páramos y humedales colombianos, los pequeños lagos pueden tener hielo en la superficie en noches muy frías, mientras debajo el agua permanece líquida. Los anfibios y microorganismos que viven allí sobreviven gracias a esta propiedad única del agua.</div></div>`);
+
+addS('s27','Mapa — La dilatación','🗺️','Tema 1 · Calor y Temperatura',`
+<div class="sh"><div class="stit">Mapa conceptual — La dilatación</div><div class="ssub">Tipos de dilatación y sus aplicaciones</div></div>
+<div class="mpwrap">${mkM(
+[{x:200,y:26,w:78,t:'Dilatación',c:'rgba(6,214,160,.3)',bc:'#06D6A0',tc:'#99f3dc'},
+ {x:58,y:95,w:64,t:'Lineal',c:'rgba(0,201,255,.2)',bc:'#00C9FF',tc:'#99e8ff'},
+ {x:152,y:95,w:76,t:'Superficial',c:'rgba(255,214,10,.2)',bc:'#FFD60A',tc:'#ffe082'},
+ {x:252,y:95,w:82,t:'Volumétrica',c:'rgba(255,77,0,.2)',bc:'#FF4D00',tc:'#ffaa80'},
+ {x:355,y:95,w:82,t:'Anomalía|agua',c:'rgba(123,47,190,.2)',bc:'#7B2FBE',tc:'#c084fc'},
+ {x:58,y:168,w:80,t:'Rieles|cables',c:'rgba(0,201,255,.1)',bc:'rgba(0,201,255,.25)',tc:'#99e8ff',fs:8},
+ {x:210,y:168,w:82,t:'Llantas|pavimento',c:'rgba(255,77,0,.1)',bc:'rgba(255,77,0,.25)',tc:'#ffaa80',fs:8},
+ {x:355,y:168,w:80,t:'Hielo flota|vida acuática',c:'rgba(123,47,190,.1)',bc:'rgba(123,47,190,.25)',tc:'#c084fc',fs:8}],
+[[0,1],[0,2],[0,3],[0,4],[1,5],[3,6],[4,7]]
+)}</div>
+<div class="ib" style="margin-top:8px;flex-shrink:0;">💡 La anomalía del agua es la única excepción: entre 0°C y 4°C se contrae al calentarse. Por eso el hielo flota y protege la vida acuática en invierno.</div>`);
+// ══ TEMA 2 ══
+addS('s31','Las fases de la materia','⚗️','Tema 2 · Fases de la Materia',`
+<div class="sh"><div class="stit">Las fases de la materia</div><div class="ssub">Presaberes — el agua que bebes, el hielo del jugo y el vapor de la olla son la misma sustancia</div></div>
+<div class="ib">🤔 <strong>Reflexiona:</strong> El agua del grifo, el hielo del congelador y el vapor de la olla son exactamente H₂O. ¿Qué los hace tan diferentes? La organización de sus moléculas.</div>
+<div class="three">
+<div class="cc ci" style="padding:10px;"><h3 style="font-size:12px;">🧊 Sólido</h3><p style="font-size:11px;">Moléculas muy juntas y ordenadas. Solo vibran en su lugar. Forma y volumen propios.</p><div class="ex" style="font-size:10.5px;">Hielo · acero · madera · sal · vidrio · naftalina</div></div>
+<div class="cc cf" style="padding:10px;"><h3 style="font-size:12px;">💧 Líquido</h3><p style="font-size:11px;">Moléculas cercanas pero móviles. Volumen propio, toma la forma del recipiente.</p><div class="ex" style="font-size:10.5px;">Agua · aceite · mercurio · jugo · sangre</div></div>
+<div class="cc cy" style="padding:10px;"><h3 style="font-size:12px;">💨 Gas</h3><p style="font-size:11px;">Moléculas muy separadas en movimiento libre. Sin forma ni volumen propios.</p><div class="ex" style="font-size:10.5px;">Vapor · aire · oxígeno · humo · gas del fogón</div></div>
+</div>
+<div class="cc cg"><h3>🔑 ¿Qué determina el estado?</h3><p>Principalmente la <strong>temperatura</strong> y la <strong>presión</strong>. Al subir la temperatura, las moléculas tienen más energía, se separan más — la sustancia puede cambiar de sólido a líquido, o de líquido a gas.</p>
+<div class="ex">🌊 El mismo H₂O existe como hielo (−18°C congelador), como agua líquida (18°C grifo) y como vapor (100°C olla). La única diferencia es la energía de sus moléculas.</div></div>`);
+
+addS('s32','Punto de fusión y ebullición','⚗️','Tema 2 · Fases de la Materia',`
+<div class="sh"><div class="stit">Punto de fusión y punto de ebullición</div><div class="ssub">Las temperaturas exactas donde una sustancia cambia de estado — y por qué la temperatura no varía durante el cambio</div></div>
+<div class="two">
+<div class="cc ci"><h3>🧊 Punto de fusión</h3><p>Temperatura exacta donde una sustancia <strong>pasa de sólido a líquido</strong>. Durante la fusión, aunque se siga calentando, la temperatura <em>no sube</em>.</p>
+<div class="ex">🧊 El agua funde a 0°C. Mientras quede hielo en tu vaso, el agua está a 0°C. No subirá hasta que el último cristal de hielo se haya derretido completamente.</div>
+<div class="ex">🍫 El chocolate funde entre 34°C y 38°C — muy cerca de la temperatura del cuerpo humano (37°C). Por eso "se derrite en la boca" y también en la mano en días calurosos.</div></div>
+<div class="cc cf"><h3>💧 Punto de ebullición</h3><p>Temperatura exacta donde una sustancia <strong>pasa de líquido a gas</strong>. Tampoco sube la temperatura mientras dura el proceso.</p>
+<div class="ex">🏠 El agua hierve a 100°C al nivel del mar. Aunque subas el fogón al máximo, el termómetro sigue en 100°C mientras quede agua líquida. La energía extra no sube la temperatura — convierte más agua en vapor.</div>
+<div class="ex">🌄 En Bogotá (2600 m) el agua hierve a ~92°C porque hay menos presión atmosférica. Las moléculas necesitan menos energía para escapar. Por eso la comida tarda más en cocinarse allá.</div></div>
+</div>
+<div class="wb">⚠️ <strong>Principio clave para el ICFES:</strong> Durante cualquier cambio de fase la temperatura permanece <strong>constante</strong> aunque se siga suministrando calor. Toda esa energía va al cambio de estado — no al cambio de temperatura. Esa energía se llama calor latente.</div>`);
+
+addS('s33','La presión cambia el punto de ebullición','⚗️','Tema 2 · Fases de la Materia',`
+<div class="sh"><div class="stit">La presión cambia el punto de ebullición</div><div class="ssub">Por qué la altitud importa al cocinar, y cómo la olla a presión aprovecha esto</div></div>
+<div class="two">
+<div class="cc cp"><h3>🏔️ Mayor altitud → hierve antes</h3><p>A mayor altitud hay menos presión atmosférica. Con menos presión, las moléculas de agua necesitan menos energía para escapar al estado gaseoso — hierven a menor temperatura.</p>
+<div class="ex">🍲 En Barranquilla (nivel del mar): el agua hierve a 100°C. En Bogotá (2600 m): hierve a ~92°C. En ambas ciudades el agua hierve, pero la temperatura de cocción es diferente. En Bogotá, un huevo tarda más en cocinarse porque el agua nunca supera 92°C.</div></div>
+<div class="cc cg"><h3>🫕 La olla a presión — al revés</h3><p>La olla a presión eleva la presión dentro de ella. Con más presión, el agua necesita más energía para hervir — el punto de ebullición sube a ~120°C. A mayor temperatura, la comida se cocina mucho más rápido.</p>
+<div class="ex">⏱️ Un fríjol en olla normal puede tardar 2 horas. En olla a presión: 30 minutos. La física al servicio de la cocina tradicional colombiana.</div></div>
+</div>
+<table class="ctab">
+<tr><th>Sustancia</th><th>Fusión (°C)</th><th>Ebullición (°C)</th><th>Uso cotidiano</th></tr>
+<tr><td>💧 Agua</td><td>0</td><td>100</td><td>Cocina, bebida, clima</td></tr>
+<tr><td>🌡️ Mercurio</td><td>−39</td><td>358</td><td>Termómetros</td></tr>
+<tr><td>🍷 Alcohol etílico</td><td>−117</td><td>78.5</td><td>Antisépticos, destilación</td></tr>
+<tr><td>🔩 Hierro</td><td>1538</td><td>2862</td><td>Construcción, herramientas</td></tr>
+</table>`);
+
+addS('s34','Mapa — Punto de fusión y ebullición','🗺️','Tema 2 · Fases de la Materia',`
+<div class="sh"><div class="stit">Mapa conceptual — Punto de fusión y ebullición</div><div class="ssub">Relaciones entre los conceptos del tema</div></div>
+<div class="mpwrap">${mkM(
+[{x:200,y:26,w:108,t:'Cambio de estado',c:'rgba(255,77,0,.3)',bc:'#FF4D00',tc:'#FF8C00'},
+ {x:85,y:95,w:88,t:'Punto de fusión',c:'rgba(0,201,255,.2)',bc:'#00C9FF',tc:'#99e8ff'},
+ {x:315,y:95,w:100,t:'Punto ebullición',c:'rgba(255,77,0,.2)',bc:'#FF8C00',tc:'#ffcc99'},
+ {x:85,y:168,w:88,t:'Sólido → Líquido',c:'rgba(0,201,255,.1)',bc:'rgba(0,201,255,.25)',tc:'#99e8ff',fs:8.5},
+ {x:200,y:168,w:88,t:'T constante|calor latente',c:'rgba(6,214,160,.2)',bc:'#06D6A0',tc:'#99f3dc',fs:8},
+ {x:320,y:168,w:82,t:'Líquido → Gas',c:'rgba(255,77,0,.1)',bc:'rgba(255,77,0,.25)',tc:'#ffaa80',fs:8.5},
+ {x:200,y:95,w:72,t:'Presión',c:'rgba(255,214,10,.2)',bc:'#FFD60A',tc:'#ffe082'}],
+[[0,1],[0,2],[0,6],[1,3],[1,4],[2,4],[2,5],[6,1],[6,2]]
+)}</div>
+<div class="ib" style="margin-top:8px;flex-shrink:0;">💡 La presión afecta el punto de ebullición: mayor presión = hierve a más temperatura (olla a presión). Menor presión = hierve a menos temperatura (Bogotá).</div>`);
+
+// ══ CAMBIOS DE FASE ══
+addS('s37','Los cambios de fase — nombres','⚗️','Tema 2 · Fases de la Materia',`
+<div class="sh"><div class="stit">Los cambios de fase</div><div class="ssub">Cada cambio entre estados tiene un nombre específico según la dirección</div></div>
+<div class="cc cp"><h3>🔄 Los seis cambios posibles</h3>
+<div class="hl">🧊→💧 <strong>Fusión</strong> — sólido a líquido<br>💧→🧊 <strong>Solidificación</strong> — líquido a sólido<br>💧→💨 <strong>Vaporización</strong> — líquido a gas (hierve o se evapora)<br>💨→💧 <strong>Condensación</strong> — gas a líquido<br>🧊→💨 <strong>Sublimación</strong> — sólido a gas directamente<br>💨→🧊 <strong>Sublimación inversa</strong> — gas a sólido directamente</div></div>
+<div class="two">
+<div class="cc cf"><h3>📍 Fusión y solidificación</h3>
+<div class="ex" style="font-size:11px;">🧊 <strong>Fusión:</strong> hielo del vaso se derrite · mantequilla en la sartén · chocolate al baño María · cera de la vela.</div>
+<div class="ex" style="font-size:11px;">❄️ <strong>Solidificación:</strong> agua formando cubitos en el congelador · gelatina enfriándose · agua del río en invierno en la cordillera.</div></div>
+<div class="cc ci"><h3>📍 Condensación y sublimación</h3>
+<div class="ex" style="font-size:11px;">💧 <strong>Condensación:</strong> vidrio del carro empañado · gotitas de rocío en plantas · espejo del baño tras la ducha · las nubes.</div>
+<div class="ex" style="font-size:11px;">✨ <strong>Sublimación:</strong> bolas de naftalina del ropero encogen sin dejar charco · hielo seco que "desaparece" · escarcha en páramos que sublima directamente.</div></div>
+</div>
+<div class="cc cg"><h3>📍 Vaporización</h3>
+<div class="ex">💨 <strong>Vaporización:</strong> ropa mojada secándose al sol · charco de agua que desaparece durante el día · olla de agua que hierve y se convierte en vapor · el sudor que se evapora de tu cuerpo tras el ejercicio.</div></div>`);
+
+addS('s38','La temperatura no cambia — calor latente','⚗️','Tema 2 · Fases de la Materia',`
+<div class="sh"><div class="stit">La temperatura no cambia durante el cambio de fase</div><div class="ssub">¿Por qué el agua hierve a 100°C aunque el fogón esté al máximo? La respuesta está en el calor latente.</div></div>
+<div class="cc cf"><h3>🔬 El calor latente — la energía oculta</h3><p>Durante un cambio de fase, toda la energía recibida se usa en <strong>romper o formar los enlaces entre moléculas</strong> para cambiar de estado — no en aumentar la velocidad de agitación de las moléculas (que es lo que sube la temperatura). Por eso el termómetro no sube durante el cambio.</p>
+<div class="hl">La energía necesaria para que una sustancia cambie de estado sin cambiar de temperatura se llama <strong>calor latente</strong>. "Latente" significa oculto — porque esa energía no se manifiesta como cambio de temperatura.</div></div>
+<div class="cc cy"><h3>📍 Cuatro ejemplos clave</h3>
+<div class="ex">1️⃣ <strong>El helado que se derrite:</strong> Mientras el helado se derrite, el termómetro al lado marca 0°C todo el tiempo aunque esté absorbiendo calor del ambiente. Solo cuando el último cristal de hielo se derrita, la temperatura del agua empezará a subir.</div>
+<div class="ex">2️⃣ <strong>El agua que hierve:</strong> Subes el fogón al máximo esperando que hierva más rápido. El agua hierve más fuerte (produce más vapor) pero el termómetro sigue en 100°C. La energía extra convierte más agua en vapor — no sube la temperatura.</div>
+<div class="ex">3️⃣ <strong>¿Por qué el vapor quema más?</strong> El vapor de la olla a presión y el agua hirviendo están ambos a 100°C. Pero el vapor quema mucho más. Al condensarse en tu piel, el vapor libera el calor latente acumulado durante la vaporización — una cantidad enorme de energía extra que el agua líquida no tiene.</div>
+<div class="ex">4️⃣ <strong>El sudor refresca:</strong> Tu cuerpo suda para enfriarse. Al evaporarse, el sudor necesita energía para cambiar de estado — esa energía la "roba" de tu piel. Por eso el sudor refresca aunque el ambiente esté caliente: la evaporación extrae calor latente directamente de tu cuerpo.</div></div>`);
+
+addS('s39','Evaporación frente a ebullición','⚗️','Tema 2 · Fases de la Materia',`
+<div class="sh"><div class="stit">Evaporación frente a ebullición</div><div class="ssub">Las dos son vaporización (líquido a gas), pero ocurren en condiciones completamente diferentes</div></div>
+<div class="two">
+<div class="cc ci"><h3>🌫️ Evaporación</h3><p>Ocurre <strong>solo en la superficie</strong> del líquido, a <strong>cualquier temperatura</strong>, de forma lenta y silenciosa, sin burbujas.</p>
+<div class="ex">🌤️ La ropa mojada se seca en el patio a 25°C sin hervir. Las moléculas de agua en la superficie del tejido con más energía se escapan al aire.</div>
+<div class="ex">💧 Un charco después de la lluvia desaparece lentamente durante el día — evaporación continua en la superficie a temperatura ambiente.</div>
+<div class="ex">🏃 El sudor se evapora de tu piel. Al hacerlo absorbe calor latente de tu cuerpo — por eso refresca.</div>
+<div class="ex">🌊 Los ríos y mares evaporan agua constantemente hacia la atmósfera — ese es el origen de la humedad del aire y de las lluvias.</div></div>
+<div class="cc cf"><h3>🔥 Ebullición</h3><p>Ocurre en <strong>toda la masa</strong> del líquido, solo a la <strong>temperatura de ebullición exacta</strong>, con burbujas visibles.</p>
+<div class="ex">🏠 El agua hierve en la olla a 100°C con burbujas que se forman en toda la masa del agua — no solo en la superficie. Las burbujas son vapor que se forma dentro del líquido y sube.</div>
+<div class="ex">☕ El agua para el tinto debe hervir (ebullición a 100°C). La ropa se seca sola al sol (evaporación a 25°C). Son procesos distintos aunque los dos conviertan agua en vapor.</div>
+<div class="ex">🔬 Si calientas alcohol en un beaker abierto a 50°C, el alcohol se evapora de la superficie (evaporación). Si lo calientas hasta 78.5°C, hace burbujas en toda la masa (ebullición).</div></div>
+</div>
+<div class="cc cg" style="margin-top:8px;"><h3>🌿 El rocío — condensación</h3>
+<div class="ex">En madrugadas frías del norte de Santander, el vapor del aire toca las plantas frías y pasa de gas a líquido formando el rocío. El mismo proceso empaña los vidrios del carro y forma las nubes.</div></div>`);
+
+addS('s40','Mapa — Cambios de fase','🗺️','Tema 2 · Fases de la Materia',`
+<div class="sh"><div class="stit">Mapa conceptual — Cambios de fase</div><div class="ssub">Todos los cambios, sus condiciones y la propiedad clave del calor latente</div></div>
+<div class="mpwrap">${mkM(
+[{x:200,y:24,w:98,t:'Cambios de fase',c:'rgba(123,47,190,.3)',bc:'#7B2FBE',tc:'#c084fc'},
+ {x:44,y:90,w:62,t:'Fusión',c:'rgba(0,201,255,.2)',bc:'#00C9FF',tc:'#99e8ff'},
+ {x:120,y:90,w:80,t:'Solidificación',c:'rgba(100,150,255,.2)',bc:'#85B7EB',tc:'#B5D4F4'},
+ {x:208,y:90,w:82,t:'Vaporización',c:'rgba(255,77,0,.2)',bc:'#FF4D00',tc:'#ffaa80'},
+ {x:302,y:90,w:80,t:'Condensación',c:'rgba(6,214,160,.2)',bc:'#06D6A0',tc:'#99f3dc'},
+ {x:375,y:90,w:74,t:'Sublimación',c:'rgba(255,214,10,.2)',bc:'#FFD60A',tc:'#ffe082'},
+ {x:105,y:165,w:98,t:'T constante|calor latente',c:'rgba(255,214,10,.15)',bc:'rgba(255,214,10,.3)',tc:'#ffe082',fs:8},
+ {x:292,y:165,w:108,t:'Evap. superficie|Ebull. toda masa',c:'rgba(255,77,0,.12)',bc:'rgba(255,77,0,.3)',tc:'#ffaa80',fs:8}],
+[[0,1],[0,2],[0,3],[0,4],[0,5],[1,6],[3,6],[3,7]]
+)}</div>
+<div class="ib" style="margin-top:8px;flex-shrink:0;">💡 <strong>Clave ICFES:</strong> Durante cualquier cambio de fase la temperatura es constante. La energía va al calor latente — a cambiar el estado, no la temperatura.</div>`);
+
+// ══ GRÁFICAS ══
+addS('s43','Gráfica del calentamiento del agua','📈','Tema 2 · Fases de la Materia',`
+<div class="sh"><div class="stit">Gráfica del calentamiento del agua</div><div class="ssub">Lee e interpreta cada zona — una de las gráficas más frecuentes en el ICFES</div></div>
+<div class="gfwrap" style="flex:1;">
+<svg viewBox="0 0 462 218" style="width:100%;max-height:100%;" xmlns="http://www.w3.org/2000/svg">
+<rect width="462" height="218" fill="#141428" rx="10"/>
+<rect x="50" y="22" width="62" height="148" fill="rgba(0,201,255,.1)"/>
+<rect x="112" y="122" width="58" height="48" fill="rgba(0,201,255,.22)"/>
+<rect x="170" y="50" width="78" height="120" fill="rgba(6,214,160,.1)"/>
+<rect x="248" y="50" width="65" height="72" fill="rgba(255,77,0,.18)"/>
+<rect x="313" y="22" width="115" height="28" fill="rgba(150,150,150,.1)"/>
+<line x1="50" y1="170" x2="436" y2="170" stroke="#8888AA" stroke-width="1.5"/>
+<line x1="50" y1="22" x2="50" y2="170" stroke="#8888AA" stroke-width="1.5"/>
+<text x="243" y="210" text-anchor="middle" fill="#8888AA" font-size="10" font-family="Nunito,sans-serif">Calor suministrado →</text>
+<text x="16" y="100" text-anchor="middle" fill="#8888AA" font-size="9" font-family="Nunito,sans-serif" transform="rotate(-90,16,100)">Temperatura °C</text>
+<line x1="46" y1="50" x2="54" y2="50" stroke="#FF4D00" stroke-width="1.5"/><text x="44" y="54" text-anchor="end" fill="#FF4D00" font-size="9" font-family="Nunito,sans-serif" font-weight="800">100</text>
+<line x1="46" y1="122" x2="54" y2="122" stroke="#00C9FF" stroke-width="1.5"/><text x="44" y="126" text-anchor="end" fill="#00C9FF" font-size="9" font-family="Nunito,sans-serif" font-weight="800">0</text>
+<polyline points="50,168 112,122 170,122 248,50 313,50 426,33" fill="none" stroke="#FFD60A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="50" y1="50" x2="430" y2="50" stroke="#FF4D00" stroke-width=".8" stroke-dasharray="4,3" opacity=".5"/>
+<line x1="50" y1="122" x2="430" y2="122" stroke="#00C9FF" stroke-width=".8" stroke-dasharray="4,3" opacity=".5"/>
+<text x="81" y="97" text-anchor="middle" fill="#00C9FF" font-size="9" font-family="Nunito,sans-serif" font-weight="800">① HIELO</text>
+<text x="81" y="109" text-anchor="middle" fill="#00C9FF" font-size="8" font-family="Nunito,sans-serif">T sube</text>
+<text x="141" y="143" text-anchor="middle" fill="#00C9FF" font-size="9" font-family="Nunito,sans-serif" font-weight="800">② FUSIÓN</text>
+<text x="141" y="155" text-anchor="middle" fill="#00C9FF" font-size="8" font-family="Nunito,sans-serif">T = 0°C fija</text>
+<text x="209" y="86" text-anchor="middle" fill="#06D6A0" font-size="9" font-family="Nunito,sans-serif" font-weight="800">③ AGUA</text>
+<text x="209" y="98" text-anchor="middle" fill="#06D6A0" font-size="8" font-family="Nunito,sans-serif">T sube</text>
+<text x="280" y="80" text-anchor="middle" fill="#FF8C00" font-size="9" font-family="Nunito,sans-serif" font-weight="800">④ VAPOR-</text>
+<text x="280" y="92" text-anchor="middle" fill="#FF8C00" font-size="8" font-family="Nunito,sans-serif">IZACIÓN</text>
+<text x="280" y="104" text-anchor="middle" fill="#FF8C00" font-size="8" font-family="Nunito,sans-serif">T=100°C fija</text>
+<text x="376" y="40" text-anchor="middle" fill="#AAAAAA" font-size="9" font-family="Nunito,sans-serif" font-weight="800">⑤ VAPOR</text>
+<text x="376" y="52" text-anchor="middle" fill="#AAAAAA" font-size="8" font-family="Nunito,sans-serif">T sube</text>
+</svg>
+</div>
+<div class="ib" style="flex-shrink:0;margin-top:7px;">💡 <strong>Clave ICFES:</strong> Zonas <strong>horizontales</strong> (② y ④) = cambios de fase a T constante. Zonas <strong>inclinadas</strong> (①③⑤) = T cambia, sin cambio de estado. El tramo ④ es más largo que ② porque el calor latente de vaporización es mayor que el de fusión.</div>`);
+
+addS('s44','Gráfica del enfriamiento del agua','📈','Tema 2 · Fases de la Materia',`
+<div class="sh"><div class="stit">Gráfica del enfriamiento del agua</div><div class="ssub">El proceso inverso — del vapor hasta el hielo. Compara con la gráfica de calentamiento.</div></div>
+<div class="gfwrap" style="flex:1;">
+<svg viewBox="0 0 462 218" style="width:100%;max-height:100%;" xmlns="http://www.w3.org/2000/svg">
+<rect width="462" height="218" fill="#141428" rx="10"/>
+<rect x="50" y="22" width="82" height="28" fill="rgba(150,150,150,.1)"/>
+<rect x="132" y="50" width="65" height="72" fill="rgba(255,77,0,.18)"/>
+<rect x="197" y="50" width="78" height="120" fill="rgba(6,214,160,.1)"/>
+<rect x="275" y="122" width="58" height="48" fill="rgba(0,201,255,.22)"/>
+<rect x="333" y="122" width="103" height="48" fill="rgba(0,201,255,.1)"/>
+<line x1="50" y1="170" x2="436" y2="170" stroke="#8888AA" stroke-width="1.5"/>
+<line x1="50" y1="22" x2="50" y2="170" stroke="#8888AA" stroke-width="1.5"/>
+<text x="243" y="210" text-anchor="middle" fill="#8888AA" font-size="10" font-family="Nunito,sans-serif">Calor cedido al ambiente →</text>
+<text x="16" y="100" text-anchor="middle" fill="#8888AA" font-size="9" font-family="Nunito,sans-serif" transform="rotate(-90,16,100)">Temperatura °C</text>
+<line x1="46" y1="50" x2="54" y2="50" stroke="#FF4D00" stroke-width="1.5"/><text x="44" y="54" text-anchor="end" fill="#FF4D00" font-size="9" font-family="Nunito,sans-serif" font-weight="800">100</text>
+<line x1="46" y1="122" x2="54" y2="122" stroke="#00C9FF" stroke-width="1.5"/><text x="44" y="126" text-anchor="end" fill="#00C9FF" font-size="9" font-family="Nunito,sans-serif" font-weight="800">0</text>
+<polyline points="50,33 132,50 197,50 275,122 333,122 436,162" fill="none" stroke="#00C9FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="50" y1="50" x2="436" y2="50" stroke="#FF4D00" stroke-width=".8" stroke-dasharray="4,3" opacity=".5"/>
+<line x1="50" y1="122" x2="436" y2="122" stroke="#00C9FF" stroke-width=".8" stroke-dasharray="4,3" opacity=".5"/>
+<text x="91" y="41" text-anchor="middle" fill="#AAAAAA" font-size="9" font-family="Nunito,sans-serif" font-weight="800">① VAPOR</text>
+<text x="91" y="53" text-anchor="middle" fill="#AAAAAA" font-size="8" font-family="Nunito,sans-serif">T baja</text>
+<text x="164" y="78" text-anchor="middle" fill="#FF8C00" font-size="9" font-family="Nunito,sans-serif" font-weight="800">② CONDEN-</text>
+<text x="164" y="90" text-anchor="middle" fill="#FF8C00" font-size="8" font-family="Nunito,sans-serif">SACIÓN</text>
+<text x="164" y="102" text-anchor="middle" fill="#FF8C00" font-size="8" font-family="Nunito,sans-serif">T=100°C fija</text>
+<text x="236" y="88" text-anchor="middle" fill="#06D6A0" font-size="9" font-family="Nunito,sans-serif" font-weight="800">③ AGUA</text>
+<text x="236" y="100" text-anchor="middle" fill="#06D6A0" font-size="8" font-family="Nunito,sans-serif">T baja</text>
+<text x="304" y="143" text-anchor="middle" fill="#00C9FF" font-size="9" font-family="Nunito,sans-serif" font-weight="800">④ SOLIDIF.</text>
+<text x="304" y="155" text-anchor="middle" fill="#00C9FF" font-size="8" font-family="Nunito,sans-serif">T = 0°C fija</text>
+<text x="386" y="143" text-anchor="middle" fill="#00C9FF" font-size="9" font-family="Nunito,sans-serif" font-weight="800">⑤ HIELO</text>
+<text x="386" y="155" text-anchor="middle" fill="#00C9FF" font-size="8" font-family="Nunito,sans-serif">T baja</text>
+</svg>
+</div>
+<div class="ib" style="flex-shrink:0;margin-top:7px;">💡 <strong>La simetría confirma:</strong> La gráfica de enfriamiento es el proceso inverso. Los tramos horizontales siguen representando cambios de fase a T constante — ahora condensación (100°C) y solidificación (0°C).</div>`);
+
+addS('s45','Mapa — Gráficas de cambios de fase','🗺️','Tema 2 · Fases de la Materia',`
+<div class="sh"><div class="stit">Mapa conceptual — Gráficas de cambios de fase</div><div class="ssub">Cómo leer e interpretar las gráficas temperatura vs tiempo</div></div>
+<div class="mpwrap">${mkM(
+[{x:200,y:25,w:98,t:'Gráfica T vs tiempo',c:'rgba(255,214,10,.3)',bc:'#FFD60A',tc:'#ffe082'},
+ {x:78,y:92,w:88,t:'Zonas inclinadas',c:'rgba(6,214,160,.2)',bc:'#06D6A0',tc:'#99f3dc'},
+ {x:200,y:92,w:94,t:'Zonas horizontales',c:'rgba(255,77,0,.2)',bc:'#FF4D00',tc:'#ffaa80'},
+ {x:330,y:92,w:82,t:'Calor latente',c:'rgba(123,47,190,.2)',bc:'#7B2FBE',tc:'#c084fc'},
+ {x:78,y:168,w:95,t:'T cambia|sin cambio estado',c:'rgba(6,214,160,.1)',bc:'rgba(6,214,160,.25)',tc:'#99f3dc',fs:8},
+ {x:200,y:168,w:94,t:'Cambio de fase|T constante',c:'rgba(255,77,0,.1)',bc:'rgba(255,77,0,.25)',tc:'#ffaa80',fs:8},
+ {x:330,y:168,w:94,t:'Tramo largo =|más energía',c:'rgba(123,47,190,.1)',bc:'rgba(123,47,190,.25)',tc:'#c084fc',fs:8}],
+[[0,1],[0,2],[0,3],[1,4],[2,5],[2,3],[3,6]]
+)}</div>
+<div class="ib" style="margin-top:8px;flex-shrink:0;">💡 El tramo ④ (vaporización) es más largo que ② (fusión): el calor latente de vaporización es ~7 veces mayor que el de fusión. Se necesita mucho más energía para vaporizar el agua que para derretir el hielo.</div>`);
+// ══ DATOS: CIENTÍFICOS ══
+const SCI={
+lav:{e:'⚗️',n:'Antoine Lavoisier',y:'1743–1794',nat:'Francés',c:'Estudió la naturaleza del calor y rechazó la teoría del flogisto. Demostró que el calor no es una sustancia sino un fenómeno físico relacionado con el movimiento de las moléculas.',d:'Fue guillotinado en la Revolución Francesa. El juez dijo: "La República no necesita sabios." Otro científico respondió: "Solo un momento para cortarle la cabeza, pero cien años no serán suficientes para producir otra igual."'},
+tho:{e:'🔨',n:'Benjamin Thompson (Conde Rumford)',y:'1753–1814',nat:'Estadounidense-Británico',c:'Demostró que el calor no es un fluido sino una forma de movimiento molecular, midiendo el calor generado al perforar cañones con taladros. Su experimento fue clave para entender la energía.',d:'Era espía doble durante la guerra de independencia de EE.UU. Pasó de ser un granjero sin estudios a convertirse en uno de los científicos más influyentes de Europa.'},
+bla:{e:'🧪',n:'Joseph Black',y:'1728–1799',nat:'Escocés',c:'Descubrió el calor latente y el calor específico — las dos propiedades más importantes del calor de este curso. Fue el primero en medir cuánto calor necesita cada sustancia para cambiar de temperatura o de estado.',d:'Su alumno y amigo James Watt usó sus ideas sobre calor latente para mejorar la máquina de vapor y desencadenar la Revolución Industrial. Sin Black, quizás no habría Watt.'},
+fou:{e:'📊',n:'Jean-Baptiste Fourier',y:'1768–1830',nat:'Francés',c:'Creó la ley matemática de la conducción del calor. También fue uno de los primeros en proponer que la atmósfera terrestre actúa como una manta que retiene el calor — el efecto invernadero.',d:'Fue abandonado de niño y educado en un monasterio. Luego acompañó a Napoleón en la expedición a Egipto. Paradójicamente, mantenía su casa a temperaturas muy altas creyendo que el calor prolongaría su vida.'},
+amo:{e:'🌡️',n:'Guillaume Amontons',y:'1663–1705',nat:'Francés',c:'Estudió la dilatación de los gases con la temperatura y anticipó el concepto del cero absoluto más de 150 años antes de que Kelvin lo definiera formalmente.',d:'Era sordo de nacimiento. Eso no le impidió inventar el primer sistema de "telégrafo óptico" para comunicaciones a larga distancia — usando señales de luz entre torres — más de 100 años antes del telégrafo eléctrico.'},
+jou:{e:'⚡',n:'James Prescott Joule',y:'1818–1889',nat:'Inglés',c:'Estableció que el calor es una forma de energía y determinó la equivalencia entre el trabajo mecánico y el calor. La unidad internacional de energía, el Joule (J), lleva su nombre.',d:'Era cervecero de profesión sin título universitario en ciencias. Sus primeros trabajos fueron rechazados por la comunidad científica. Hoy es considerado uno de los físicos más importantes del siglo XIX.'},
+fah:{e:'🌡️',n:'Daniel Gabriel Fahrenheit',y:'1686–1736',nat:'Alemán-Holandés',c:'Inventó el termómetro de mercurio y creó la escala Fahrenheit. Sus termómetros eran mucho más precisos y reproducibles que cualquier instrumento anterior.',d:'El 0°F lo definió como la temperatura más baja que logró en su laboratorio (mezcla de agua, hielo y sal). El 96°F lo fijó midiendo la temperatura corporal de su esposa. Hoy sabemos que es 98.6°F.'},
+cel:{e:'❄️',n:'Anders Celsius',y:'1701–1744',nat:'Sueco',c:'Creó la escala centígrada (Celsius), dividiendo en 100 partes el intervalo entre la fusión y la ebullición del agua. Es la escala más usada en el mundo.',d:'Curiosamente, Celsius la propuso al revés: 0° era el punto de ebullición del agua y 100° el de fusión del hielo. Después de su muerte a los 42 años, el botánico Carl Linnaeus invirtió la escala al orden que usamos hoy.'},
+kel:{e:'🔬',n:'William Thomson · Lord Kelvin',y:'1824–1907',nat:'Irlandés-Escocés',c:'Propuso la escala absoluta de temperatura basada en el cero absoluto teórico y desarrolló la termodinámica moderna junto a Clausius.',d:'Publicó su primer artículo científico importante a los 22 años. Vivió 83 años y produjo más de 600 trabajos. Fue el primer científico en ser nombrado miembro de la Cámara de los Lores exclusivamente por sus contribuciones a la ciencia.'},
+car:{e:'🔄',n:'Nicolas Léonard Sadi Carnot',y:'1796–1832',nat:'Francés',c:'Considerado el padre de la termodinámica. Analizó cómo funciona un motor de vapor ideal (Ciclo de Carnot) y demostró que ningún motor puede ser 100% eficiente.',d:'Murió de cólera a los 36 años con una sola obra publicada. Esa única obra cambió la física para siempre. Sus manuscritos fueron quemados por miedo al contagio del cólera — se perdió para siempre parte de su trabajo.'},
+};
+
+// ══ BANCO DE PREGUNTAS ══
+const QDB={
+// TESTS (5 por subtema)
+qt1:[
+{c:'Al salir de la ducha mojado sientes frío aunque la habitación esté a 22°C.',q:'¿Qué proceso físico explica esa sensación de frío?',o:['El agua fría de la ducha baja permanentemente la temperatura corporal','El vapor de agua al evaporarse absorbe calor latente directamente de la piel, enfriándola','El cuerpo produce menos calor cuando está mojado','El frío del ambiente penetra más fácil la piel húmeda'],a:1,f:'Al evaporarse, el agua necesita energía (calor latente) que toma de tu piel. Esa extracción de energía enfría la piel. El frío que sientes es tu cuerpo perdiendo calor.'},
+{c:'Un vaso con refresco frío se deja sobre la mesa. Al rato ya no está frío.',q:'¿Cuál afirmación describe correctamente lo ocurrido?',o:['El frío del refresco se evaporó hacia el ambiente','El calor del ambiente viajó hacia el refresco hasta que ambos alcanzaron la misma temperatura','El refresco generó calor al estar en contacto con la mesa','El ambiente absorbió el frío del refresco'],a:1,f:'El calor siempre viaja del más caliente (ambiente 26°C) al más frío (refresco 4°C). El proceso se detuvo cuando ambos alcanzaron la misma temperatura — equilibrio térmico.'},
+{c:'Un estudiante dice: "el hielo enfría el agua porque el frío del hielo pasa al agua".',q:'¿Es correcta esa afirmación?',o:['Sí — el frío es energía que puede transferirse','No — el frío no fluye. El calor del agua viaja hacia el hielo, no al revés','Sí — pero solo cuando el hielo está sumergido directamente','No — el agua no se enfría con el hielo, solo mezclan temperaturas'],a:1,f:'El frío no existe como flujo de energía. SIEMPRE es el calor el que se mueve, del más caliente (agua) al más frío (hielo).'},
+{c:'Una cuchara de metal y un mango de madera llevan horas en el mismo cajón a temperatura ambiente.',q:'¿Por qué el metal se siente más frío si ambos están a la misma temperatura?',o:['Porque el metal está realmente a menor temperatura','Porque el metal extrae calor de la mano mucho más rápido — esa pérdida rápida se siente como frío intenso','Porque la madera genera calor propio que la mantiene cálida','Porque el metal tiene más masa y absorbe más temperatura del ambiente'],a:1,f:'Misma temperatura, diferente conductividad. El metal conduce bien = extrae calor de tu mano rápido = parece muy frío. La madera conduce mal = extrae calor lento = parece tibio.'},
+{c:'El termómetro clínico se deja bajo el brazo 3 minutos para medir la temperatura.',q:'¿Qué principio explica por qué marca la temperatura exacta del cuerpo?',o:['La presión del brazo comprime el mercurio al nivel correcto','El termómetro alcanza el equilibrio térmico con el cuerpo — intercambian calor hasta que ambos están a la misma temperatura','El cuerpo emite radiación que el mercurio absorbe directamente','El termómetro tiene un mecanismo interno que detecta la temperatura'],a:1,f:'Equilibrio térmico: el termómetro y el cuerpo intercambian calor hasta que están a la misma temperatura. Cuando el mercurio deja de subir, el termómetro marca la temperatura exacta del cuerpo.'},
+],
+qt2:[
+{c:'Se calienta 1 kg de agua y 1 kg de hierro con el mismo fogón el mismo tiempo.',q:'¿Cuál llegará a mayor temperatura?',o:['El agua — tiene mayor calor específico y absorbe más calor','El hierro — tiene menor calor específico, sube más de temperatura con el mismo calor','Los dos a la misma temperatura','El hierro solo si es más pequeño en volumen'],a:1,f:'El hierro tiene calor específico mucho menor que el agua. Con el mismo calor suministrado, el hierro sube mucho más de temperatura.'},
+{c:'En la costa, la arena quema los pies al mediodía pero el mar está fresco, aunque ambos recibieron el mismo sol toda la mañana.',q:'¿Qué explica esta diferencia?',o:['El mar está más profundo y la brisa lo refresca','La arena es más oscura y absorbe más calor solar','El agua tiene calor específico mucho más alto — necesita mucho más calor para subir la misma temperatura','La arena tiene contacto con el suelo caliente'],a:2,f:'El calor específico del agua es mucho mayor que el de la arena. Con el mismo calor solar, la arena sube mucho más de temperatura que el agua. Por eso la arena quema y el mar está fresco.'},
+{c:'Un pocillo de tinto de metal y uno de cerámica tienen el mismo café a 88°C. Se dejan en la mesa.',q:'¿Cuál café se enfriará más rápido?',o:['El de cerámica — conduce el calor mejor','El de metal — conduce el calor al ambiente más rápidamente','Los dos a la misma velocidad','El de metal solo si está sobre superficie fría'],a:1,f:'El metal tiene mayor conductividad térmica que la cerámica. El café en pocillo de metal transfiere su calor al ambiente más rápido. Por eso los buenos pocillos son de cerámica gruesa.'},
+{c:'Las ciudades costeras del Caribe colombiano tienen climas más estables que ciudades del interior a igual latitud.',q:'¿Qué propiedad del agua del mar lo explica?',o:['La transparencia del agua que refleja la luz solar','El alto calor específico del agua — absorbe calor en verano y lo libera lentamente en invierno, estabilizando el clima','La convección constante del agua','La reflexión de la radiación solar en la superficie'],a:1,f:'El alto calor específico del agua hace que los océanos actúen como reguladores climáticos: absorben enormes cantidades de calor sin calentarse mucho, y lo liberan gradualmente.'},
+{c:'Se tienen 2 litros de agua caliente y se mezclan con 1 litro de agua fría de la misma temperatura inicial.',q:'¿Cómo cambia la temperatura de equilibrio si se usa más agua caliente?',o:['La temperatura de equilibrio siempre es el promedio independiente de las masas','La temperatura de equilibrio se acerca más a la del agua caliente cuando hay más de ella','La temperatura de equilibrio siempre es la del agua fría','La temperatura no cambia si se mezclan cantidades diferentes'],a:1,f:'La temperatura de equilibrio depende de las masas. Con más agua caliente, la temperatura de equilibrio final estará más cerca de la temperatura del agua caliente.'},
+],
+qt3:[
+{c:'Se mezclan 500 ml de agua a 80°C con 500 ml de agua a 20°C en recipiente aislado.',q:'¿Cuál será la temperatura de equilibrio?',o:['80°C — el agua caliente domina','20°C — el agua fría domina','50°C — con masas y material iguales la temperatura de equilibrio es el promedio','60°C — el agua caliente aporta más'],a:2,f:'Con masas iguales del mismo material: T_eq = (80+20)/2 = 50°C. El calor cedido por el agua caliente = el absorbido por el agua fría.'},
+{c:'La abuela tiene fiebre de 38.5°C. Se pone un paño húmedo frío en la frente.',q:'¿Por qué el paño húmedo es más efectivo que un paño seco a igual temperatura?',o:['El paño húmedo pesa más y presiona mejor','El paño húmedo extrae calor por equilibrio térmico Y por calor latente al evaporarse — doble mecanismo','El paño húmedo bloquea la radiación del cuerpo','El agua del paño contiene sales que absorben la fiebre'],a:1,f:'Doble mecanismo: el paño más frío absorbe calor del cuerpo por equilibrio térmico (conducción), y el agua al evaporarse absorbe calor latente adicional de la piel. Los dos efectos juntos son más potentes.'},
+{c:'Al entrar a un cuarto con aire acondicionado fuerte, una persona siente que "el frío le atacó".',q:'¿Cuál es la descripción física correcta?',o:['El frío del cuarto salió a tocar el cuerpo','El cuerpo cede calor rápidamente al aire frío del cuarto — esa pérdida acelerada se percibe como frío intenso','El aire frío y el cuerpo intercambian frío en partes iguales','La presión del aire frío ejerce fuerza sobre la persona'],a:1,f:'El cuerpo (37°C) está en un ambiente frío (18°C). El calor fluye del cuerpo al aire frío rápidamente. Esa pérdida acelerada de calor del cuerpo es lo que se siente como "frío intenso".'},
+{c:'Un termómetro marca 0°C dentro de un vaso con hielo y agua mezclados.',q:'¿Cuándo subirá la temperatura del termómetro?',o:['Nunca — el hielo mantiene siempre 0°C','Cuando todo el hielo se haya derretido completamente','Cuando el agua haya cedido todo su calor al hielo','Cuando el termómetro alcance el equilibrio con el hielo'],a:1,f:'Mientras quede hielo presente, la temperatura permanece en 0°C (punto de fusión del agua). Solo cuando el último cristal de hielo sea agua líquida, la temperatura puede subir.'},
+{c:'¿Por qué se recomienda calentar la taza antes de servir el espresso?',o:['Para esterilizarla antes de usarla','Para evitar que la taza fría absorba calor del café por equilibrio térmico, manteniendo la bebida más caliente','Por tradición sin base física','Para que la cerámica se expanda y quepa más café'],a:1,f:'Equilibrio térmico: si la taza está fría, absorbe calor del café caliente hasta alcanzar la misma temperatura. Eso enfría el café. Una taza caliente no "roba" calor al café.'},
+],
+qt4:[
+{c:'A 2 metros de una fogata sientes calor intenso en la cara aunque no haya viento.',q:'¿Qué mecanismo transmite ese calor?',o:['Conducción — el calor viaja por el suelo hasta tus pies','Convección — el aire caliente de la fogata sube y llega a tu cara','Radiación — la fogata emite ondas que viajan directamente a tu piel sin necesitar el aire','Equilibrio térmico directo entre tú y la fogata'],a:2,f:'Radiación: la fogata emite ondas infrarrojas en todas las direcciones sin necesitar el aire. Por eso sientes calor aunque el aire esté completamente quieto.'},
+{c:'El agua de una olla se calienta uniformemente aunque solo el fondo toque el fogón.',q:'¿Qué mecanismo distribuye el calor en toda el agua?',o:['Conducción — el calor pasa de molécula en molécula desde el fondo','Convección — el agua caliente del fondo sube (menos densa) y la fría baja, creando corrientes','Radiación — el fondo caliente emite ondas que calientan el agua superior','Los tres mecanismos en igual proporción'],a:1,f:'Convección en líquidos: el agua del fondo se calienta, se vuelve menos densa y sube. El agua fría baja a reemplazarla. Corrientes circulares distribuyen el calor uniformemente.'},
+{c:'Un termo de doble pared con vacío entre las paredes mantiene el café caliente durante horas.',q:'¿Por qué el vacío es tan efectivo?',o:['El vacío está a 0°C y equilibra los extremos','Sin materia no puede haber ni conducción ni convección — solo queda la mínima radiación que las paredes pulidas reflejan','El vacío genera presión negativa que retiene el calor','Las paredes metálicas generan un campo que retiene el calor'],a:1,f:'Conducción necesita materia. Convección necesita fluido. El vacío no tiene ninguno de los dos. Solo queda la radiación, que las paredes internas pulidas del termo minimizan al reflejarla.'},
+{c:'El Sol calienta la Tierra a través de 150 millones de km de vacío total.',q:'¿Qué mecanismo lo hace posible?',o:['Conducción a través de partículas muy finas del espacio','Convección del viento solar extendido','Radiación — el Sol emite ondas electromagnéticas que viajan por el vacío sin necesitar ningún material','Equilibrio térmico a distancia por efecto gravitacional'],a:2,f:'Solo la radiación puede viajar por el vacío absoluto. El Sol emite ondas electromagnéticas (luz, infrarrojos) que atraviesan el espacio y calientan la Tierra.'},
+{c:'¿Por qué los mangos de las ollas son de madera o plástico y no de metal?',o:['Son más baratos de fabricar','Son malos conductores del calor — transmiten el calor de la olla a la mano muy lentamente','El metal es muy pesado para el mango','El plástico resiste mejor las altas temperaturas que el metal'],a:1,f:'La madera y el plástico tienen muy baja conductividad térmica. El calor de la olla tarda mucho en llegar al mango. Un mango de metal conduciría el calor rápidamente y quemaría la mano.'},
+],
+qt5:[
+{c:'Los rieles de tren tienen pequeños espacios entre segmentos.',q:'¿Cuál es la razón física de esos espacios?',o:['Para reducir el ruido y vibración','Para que el metal pueda dilatarse en verano sin que los tramos choquen, se doblen o rompan','Para facilitar el mantenimiento individual de cada segmento','Para que el agua lluvia drene entre los segmentos'],a:1,f:'Dilatación lineal: el metal se expande con el calor. En un día caluroso, cada riel puede crecer varios milímetros. Las juntas de dilatación absorben esa expansión sin que los rieles se doblen.'},
+{c:'Una botella de vidrio completamente llena de agua se pone en el congelador y al día siguiente está rota.',q:'¿Qué explica la ruptura?',o:['El vidrio se contrae con el frío más rápido que el agua','El agua al congelarse se expande — sin espacio, la presión del hielo rompe el vidrio','El cambio brusco de temperatura fractura el vidrio','El frío hace frágil el vidrio y cualquier vibración lo rompe'],a:1,f:'Anomalía del agua: al congelarse se expande (necesita más volumen). Si la botella está llena, no hay espacio. La fuerza del hielo en expansión rompe el vidrio. Siempre deja espacio al congelar líquidos.'},
+{c:'Las llantas del carro marcan presión correcta en la madrugada fría. A las 2 pm muestran presión más alta sin que nadie las inflara.',q:'¿Qué explica el aumento?',o:['El movimiento del carro genera calor que entra a las llantas','El aire dentro se dilata con el calor y empuja más fuerte las paredes — mayor presión','El caucho se ablanda y reduce el espacio interior','El calor del asfalto comprime el aire de las llantas'],a:1,f:'Dilatación volumétrica en gases: el aire calentado ejerce más presión sobre las paredes de la llanta. Por eso siempre se verifica la presión en frío — la lectura en caliente es falsa.'},
+{c:'¿Por qué el hielo flota en el agua en lugar de hundirse como hace casi todo lo demás al solidificarse?',o:['El hielo es hueco por dentro y eso lo hace menos denso','Anomalía del agua: al congelarse se expande y el hielo resulta menos denso que el agua líquida — por eso flota','La tensión superficial del agua sostiene el hielo flotando','El hielo flota solo en agua dulce, no en agua salada'],a:1,f:'Anomalía del agua: al congelarse, el agua se expande y el hielo tiene menor densidad que el agua líquida. Menor densidad = flota. Sin esta propiedad, los lagos se congelarían de fondo a superficie y no habría vida acuática.'},
+{c:'Al calentar una lámina cuadrada de metal, se observa que crece en largo, ancho y grosor.',q:'¿Cuál tipo de dilatación describe mejor este fenómeno?',o:['Dilatación lineal — el calor actúa en una sola dirección','Dilatación superficial — solo crece en largo y ancho','Dilatación volumétrica — el cuerpo crece en sus tres dimensiones simultáneamente','Anomalía del metal — todos los metales se comportan diferente'],a:2,f:'Dilatación volumétrica: cualquier sólido en realidad se dilata en sus tres dimensiones. Lineal y superficial son simplificaciones para objetos donde una o dos dimensiones dominan.'},
+],
+qt6:[
+{c:'Se pone agua a hervir en Bogotá (2600 m de altitud) y en Barranquilla (nivel del mar).',q:'¿En cuál ciudad hervirá a menor temperatura y por qué?',o:['En Barranquilla — el calor costero es más intenso','En Bogotá — la menor presión atmosférica reduce la energía que las moléculas necesitan para escapar al estado gaseoso','En las dos a la misma temperatura — el punto de ebullición no cambia','En Bogotá — el frío de la ciudad requiere menos energía para hervir'],a:1,f:'El punto de ebullición depende de la presión. A mayor altitud, menor presión atmosférica. Las moléculas de agua necesitan menos energía para escapar al estado gaseoso — hierven a menor temperatura (~92°C en Bogotá).'},
+{c:'Un bloque de hielo a 0°C recibe calor constantemente.',q:'¿Qué ocurre con la temperatura mientras el hielo se derrite?',o:['Sube gradualmente de 0°C hasta 100°C','Permanece en 0°C durante toda la fusión — toda la energía va al cambio de estado','Baja porque el derretirse consume temperatura del sistema','Oscila entre −5°C y 5°C hasta que todo se derrite'],a:1,f:'Durante la fusión la temperatura permanece en 0°C. Toda la energía suministrada va al calor latente de fusión (romper los enlaces del hielo). Solo cuando no quede hielo, la temperatura puede subir.'},
+{c:'El mercurio se usa en termómetros clásicos. Su punto de fusión es −39°C y su punto de ebullición es 358°C.',q:'¿Por qué estas propiedades lo hacen útil para termómetros?',o:['Porque es el único metal líquido a temperatura ambiente','Permanece líquido en todo el rango de temperaturas de uso cotidiano y se dilata de manera muy constante y predecible','Porque tiene color plateado que facilita la lectura','Porque tiene alto calor específico que lo hace muy sensible'],a:1,f:'El mercurio permanece líquido entre −39°C y 358°C — cubre todo el rango de uso cotidiano. Su coeficiente de dilatación es muy constante: cada grado produce el mismo aumento de volumen, lo que da lecturas precisas.'},
+{c:'El alcohol etílico hierve a 78.5°C y el agua a 100°C. Se mezclan y se calientan juntos.',q:'¿Qué ocurrirá primero?',o:['El agua hervirá primero porque tiene mayor punto de ebullición','El alcohol se vaporizará primero — llega antes a su punto de ebullición (78.5°C)','Los dos hervirán exactamente al mismo tiempo','Ninguno hervira — la mezcla tiene un punto de ebullición intermedio invariable'],a:1,f:'El alcohol llega primero a su punto de ebullición (78.5°C). Este principio se usa en la destilación para separar el alcohol del agua en la producción de licores.'},
+{c:'¿Qué tienen en común el punto de fusión y el punto de ebullición respecto a la temperatura?',o:['En ambos la temperatura sube rápidamente','En ambos la temperatura permanece constante mientras dura el cambio de estado — toda la energía va al calor latente','En fusión sube y en ebullición baja','Son completamente diferentes — no tienen nada en común'],a:1,f:'En ambos cambios de fase la temperatura es constante. Toda la energía va al calor latente — a cambiar el estado, no la temperatura. Por eso aparecen como tramos horizontales en la gráfica.'},
+],
+qt7:[
+{c:'El vapor de agua a 100°C y el agua líquida a 100°C están a la misma temperatura.',q:'¿Por qué una quemadura con vapor es más severa que con agua líquida a la misma temperatura?',o:['El vapor se mueve más rápido y ejerce más presión sobre la piel','Al condensarse en la piel, el vapor libera el calor latente de vaporización — una gran energía extra que el agua líquida no tiene','El vapor tiene mayor temperatura real aunque el termómetro marque lo mismo','El vapor penetra más profundo en la piel que el agua líquida'],a:1,f:'Calor latente de vaporización: el vapor al condensarse libera toda la energía acumulada durante la vaporización. Esa energía extra es lo que causa la quemadura más severa. El agua líquida a 100°C no tiene esa energía almacenada.'},
+{c:'Las bolas de naftalina del ropero se van haciendo más pequeñas sin dejar ningún líquido en el cajón.',q:'¿Qué cambio de fase explica esto?',o:['Evaporación — la naftalina es un líquido transparente que se evapora','Fusión — se derrite pero el líquido es invisible','Sublimación — la naftalina pasa directamente de sólido a gas sin pasar por líquido','Condensación inversa de las moléculas sólidas'],a:2,f:'Sublimación: sólido pasa directamente a gas sin pasar por el estado líquido. Por eso no hay charco. El gas de naftaleno que se libera es el que ahuyenta las polillas.'},
+{c:'La ropa mojada se seca en el patio a 25°C sin llegar a 100°C.',q:'¿Cómo se llama este proceso y por qué ocurre a temperatura baja?',o:['Ebullición retardada — el sol calienta el agua hasta 100°C en el tejido','Evaporación — las moléculas de agua en la superficie del tejido con suficiente energía se escapan al aire a cualquier temperatura','Sublimación del agua en la ropa','Vaporización instantánea por la radiación solar'],a:1,f:'Evaporación: proceso de vaporización que ocurre solo en la superficie a cualquier temperatura. Las moléculas con más energía cinética en la superficie se escapan al aire. No necesita llegar a 100°C.'},
+{c:'En una mañana fría del norte de Santander, las plantas del jardín amanecen con gotitas de rocío.',q:'¿Qué cambio de fase produjo esas gotitas?',o:['Fusión del hielo de la noche anterior','Condensación — el vapor del aire caliente se convirtió en líquido al tocar las superficies frías de las plantas','Precipitación — microgotas de lluvia muy fina se depositaron en las plantas','Sublimación inversa del hielo de la atmósfera'],a:1,f:'Condensación: durante la noche las plantas se enfriaron. El vapor del aire (más caliente) tocó esas superficies frías y pasó del estado gaseoso al líquido, formando las gotitas de rocío.'},
+{c:'El sudor después del ejercicio refresca el cuerpo aunque el ambiente esté caliente.',q:'¿Por qué el sudor refresca si se evapora a temperatura ambiente?',o:['El sudor es un líquido frío producido por las glándulas sudoríparas','Al evaporarse, el sudor absorbe calor latente de vaporización directamente de la piel — extrae energía del cuerpo y lo enfría','El sudor aumenta la conductividad térmica de la piel','El movimiento del sudor al escurrir crea convección que aleja el calor'],a:1,f:'Calor latente de vaporización: para evaporarse, el sudor toma energía directamente de la piel. Esa extracción de energía enfría la superficie corporal. Por eso la brisa ayuda — acelera la evaporación y con ella el enfriamiento.'},
+],
+qt8:[
+{c:'En la gráfica de calentamiento del agua hay una zona horizontal exactamente a 0°C.',q:'¿Qué está ocurriendo durante esa zona?',o:['El calor se acumula para después subir más rápido','El hielo se funde — toda la energía va al calor latente de fusión y la temperatura permanece constante en 0°C','El termómetro tiene error de lectura a 0°C','El agua alcanzó su temperatura mínima posible'],a:1,f:'La zona horizontal a 0°C es la fusión. Toda la energía del fogón va al calor latente — a romper los enlaces del hielo. La temperatura no puede subir hasta que no quede hielo.'},
+{c:'El tramo horizontal a 100°C en la gráfica de calentamiento es mucho más largo que el de 0°C.',q:'¿Qué indica esa diferencia?',o:['El fogón pierde potencia a temperaturas altas','El calor latente de vaporización es mucho mayor que el de fusión — se necesita mucha más energía para vaporizar que para derretir','Hay más agua que hielo en el sistema','La temperatura de 100°C es más difícil de mantener estable'],a:1,f:'El calor latente de vaporización es ~7 veces mayor que el de fusión. Se necesita mucha más energía para convertir agua en vapor. Por eso el tramo horizontal a 100°C es mucho más largo en la gráfica.'},
+{c:'Un estudiante dice: "cuando el agua hierve, el fogón ya no tiene suficiente potencia para subir la temperatura".',q:'¿Es correcta esa afirmación?',o:['Sí — los fogones pierden eficiencia a temperaturas altas','No — el fogón tiene la misma potencia, pero toda esa energía va al calor latente de vaporización, no a subir la temperatura','Sí — a 100°C el agua ya no puede absorber más calor','No — la temperatura sí sigue subiendo pero el termómetro no lo detecta'],a:1,f:'El fogón mantiene su potencia. Toda la energía va a convertir agua en vapor (calor latente), no a aumentar la agitación molecular (temperatura). Por eso el termómetro permanece en 100°C aunque el fogón esté al máximo.'},
+{c:'¿Qué representan los tramos inclinados de la gráfica de calentamiento del agua?',o:['Los momentos en que el fogón se apaga temporalmente','Cambios de temperatura sin cambio de estado — la energía aumenta la agitación molecular (sube la T)','Los momentos en que hay dos estados coexistiendo','Los períodos donde se pierde calor hacia el ambiente'],a:1,f:'Tramos inclinados = cambio de temperatura sin cambio de estado. La energía del fogón va a aumentar la velocidad de agitación de las moléculas — lo que se manifiesta como aumento de temperatura.'},
+{c:'Al enfriar vapor de agua desde 120°C hasta hielo a −10°C, ¿cuántas veces permanece constante la temperatura?',o:['Una vez — solo cuando el agua se congela a 0°C','Dos veces — durante la condensación (100°C, gas→líquido) y durante la solidificación (0°C, líquido→sólido)','Tres veces — a 100°C, 50°C y 0°C','La temperatura nunca permanece constante al enfriarse'],a:1,f:'Dos cambios de fase: condensación a 100°C (todo el vapor se convierte en agua antes de que la temperatura baje de 100°C) y solidificación a 0°C (toda el agua se convierte en hielo antes de que la temperatura baje de 0°C).'},
+],
+};
+// ══ CHECKPOINTS ══
+const CPQ={
+cp1:{sci:'lav',qs:[
+{c:'Alguien dice que "el frío del hielo pasa a la bebida caliente para enfriarla".',q:'¿Es correcta esa descripción física?',o:['Sí — el frío es energía que fluye del más frío al más caliente','No — el frío no fluye. El calor de la bebida viaja hacia el hielo','Sí — pero solo con contacto directo','No — el hielo actúa como aislante sin intercambiar energía'],a:1,f:'El frío no existe como flujo de energía. El CALOR siempre fluye del más caliente (bebida) al más frío (hielo).'},
+{c:'Dos tazas de café a 90°C: una con tapa, otra sin tapa. Se dejan en la misma habitación.',q:'¿Cuál llegará al equilibrio térmico con el ambiente más rápido?',o:['Las dos igual — mismo café, mismo ambiente','La taza con tapa — la presión acelera el intercambio','La taza sin tapa — pierde calor más rápido por evaporación y convección directa','Ninguna llegará al equilibrio'],a:2,f:'Sin tapa: el café pierde calor por evaporación (calor latente) y por convección directa con el aire. Con tapa estos mecanismos se bloquean.'},
+{c:'Al poner la mano sobre una estufa fría no se siente nada. Al encenderla, se siente calor.',q:'¿Qué cambió físicamente?',o:['La estufa creó una nueva sustancia llamada calor','La estufa ya tenía temperatura: la mano generó el calor al tocarla','La diferencia de temperatura entre estufa y mano aumentó — ahora hay flujo de calor de la estufa hacia la mano','La estufa emite electricidad que la mano siente como calor'],a:2,f:'Antes: sin diferencia de temperatura = sin flujo de calor. Después: estufa más caliente que la mano = diferencia = calor fluye de la estufa hacia la mano.'},
+{c:'¿Cuál es la diferencia fundamental entre calor y temperatura?',o:['No hay diferencia — son la misma magnitud en distintas unidades','La temperatura mide la agitación molecular de un cuerpo; el calor es energía que fluye entre cuerpos a diferente temperatura','El calor es propiedad del cuerpo; la temperatura es la energía que se transfiere','La temperatura siempre es mayor que el calor en el mismo cuerpo'],a:1,f:'Temperatura = estado térmico del cuerpo (agitación molecular). Calor = energía en movimiento entre cuerpos. Un cuerpo tiene temperatura pero no "tiene" calor — el calor fluye.'},
+{c:'Una persona mete la mano en agua a 30°C y dice que "el frío del agua pasó a su mano".',q:'¿Es correcta esa descripción?',o:['Sí — si se siente frío, el frío fluye del agua a la mano','No — el cuerpo (37°C) cede calor al agua (30°C) porque está más caliente. La pérdida de calor se percibe como frío','El calor fluye en ambas direcciones simultáneamente en igual cantidad','Depende de si la persona está sudando o no'],a:1,f:'El cuerpo (37°C) está más caliente que el agua (30°C). El CALOR fluye del cuerpo hacia el agua. Esa pérdida de calor del cuerpo es lo que se interpreta como sensación de frío.'},
+]},
+cp2:{sci:'tho',qs:[
+{c:'Se calientan 1 kg de agua y 1 kg de hierro con el mismo fogón el mismo tiempo.',q:'¿Cuál tendrá mayor temperatura al final?',o:['El agua — más calor específico','El hierro — menor calor específico, sube más con el mismo calor','Los dos igual','El hierro solo si es más pequeño'],a:1,f:'Menor calor específico del hierro = sube más de temperatura con el mismo calor. El agua necesita mucho más calor para la misma subida.'},
+{c:'La arena de la playa quema al mediodía pero el mar está fresco, ambos bajo el mismo sol.',q:'¿Qué lo explica?',o:['El mar está más profundo','La arena es más oscura y absorbe más','El agua tiene calor específico mucho más alto que la arena','La arena tiene contacto con el suelo caliente'],a:2,f:'El calor específico del agua es mucho mayor que el de la arena. Con el mismo calor solar, la arena sube mucho más de temperatura.'},
+{c:'Los ríos del norte de Santander moderan el clima de las zonas cercanas.',q:'¿Qué propiedad del agua lo explica?',o:['La transparencia del agua','El alto calor específico — absorbe calor en épocas cálidas y lo libera en épocas frías','La convección constante del agua','La reflexión de la radiación solar'],a:1,f:'El alto calor específico del agua hace que los ríos y lagos absorban y liberen calor gradualmente, moderando los extremos de temperatura de la región.'},
+{c:'Un pocillo de metal y uno de cerámica tienen el mismo café a 90°C.',q:'¿Cuál se enfría más rápido?',o:['El de cerámica','El de metal — mayor conductividad, cede calor al ambiente más rápido','Los dos igual','El de metal solo si está sobre superficie fría'],a:1,f:'El metal tiene mayor conductividad térmica que la cerámica. El café en pocillo de metal transfiere su calor al ambiente más rápidamente.'},
+{c:'¿Por qué el cuerpo humano, siendo 60% agua, mantiene una temperatura tan estable?',o:['Porque la piel aísla perfectamente','El alto calor específico del agua — el cuerpo puede acumular o perder mucho calor sin grandes cambios de temperatura','Porque el corazón genera calor constante que compensa','Porque los músculos producen exactamente el calor que se pierde'],a:1,f:'El alto calor específico del agua hace que el cuerpo sea muy resistente a los cambios de temperatura — puede acumular o liberar grandes cantidades de calor con pocos cambios de temperatura.'},
+]},
+cp3:{sci:'bla',qs:[
+{c:'Dos cuerpos a diferente temperatura se ponen en contacto.',q:'¿Cuándo se detiene el intercambio de calor?',o:['Cuando el cuerpo frío absorbió toda la energía posible','Cuando ambos alcanzan la misma temperatura — equilibrio térmico','Cuando el cuerpo caliente se queda sin energía','Después de 5 minutos de contacto siempre'],a:1,f:'El intercambio se detiene cuando ambos alcanzan la misma temperatura. Sin diferencia de temperatura, no hay flujo de calor.'},
+{c:'Se mezclan 200 ml de agua a 70°C con 200 ml de agua a 10°C en recipiente aislado.',q:'¿Cuál es la temperatura de equilibrio?',o:['70°C','10°C','40°C — el promedio de las dos temperaturas','55°C'],a:2,f:'Con masas iguales del mismo material: T_eq = (70+10)/2 = 40°C.'},
+{c:'¿Por qué hay que esperar 3 minutos después de poner el termómetro bajo el brazo?',o:['El mercurio necesita ese tiempo para reaccionar con el calor','Para alcanzar el equilibrio térmico con el cuerpo — solo en ese punto la lectura es exacta','Los termómetros necesitan calibración de 3 minutos','El cuerpo necesita estabilizar su temperatura primero'],a:1,f:'El termómetro y el cuerpo necesitan tiempo para intercambiar calor hasta el equilibrio térmico. Antes de ese punto, el termómetro marca una temperatura intermedia, no la real del cuerpo.'},
+{c:'Un vaso tiene hielo y agua a 0°C. ¿Cuándo subirá la temperatura?',o:['Nunca — el hielo mantiene siempre 0°C','Cuando todo el hielo se haya derretido completamente','Cuando el agua haya cedido todo su calor al hielo','Cuando el termómetro alcance equilibrio con el hielo'],a:1,f:'Mientras quede hielo, la temperatura es 0°C (punto de fusión del agua). Solo cuando el último cristal sea agua líquida, la temperatura puede subir.'},
+{c:'¿Por qué el metal frío se siente más frío que la madera a la misma temperatura?',o:['El metal está realmente a menor temperatura','El metal extrae calor de la mano mucho más rápido — alta conductividad = pérdida veloz = se siente muy frío','La madera genera calor propio','El metal tiene mayor masa por volumen'],a:1,f:'Misma temperatura, diferente velocidad de extracción de calor. El metal conduce bien = saca calor rápido = parece muy frío. La madera conduce mal = saca calor despacio = parece tibio.'},
+]},
+cp4:{sci:'fou',qs:[
+{c:'¿Por qué los mangos de las ollas son de madera o plástico, no de metal?',o:['Son más baratos','Son malos conductores — el calor tarda mucho en llegar del cuerpo de la olla al mango','El metal es muy pesado','El plástico resiste mejor las altas temperaturas'],a:1,f:'La madera y el plástico tienen muy baja conductividad térmica. El calor tarda mucho en llegar al mango por conducción.'},
+{c:'Una persona junto a una fogata pone un cartón entre ella y el fuego. El calor disminuye.',q:'¿Qué mecanismo bloqueó el cartón?',o:['Conducción por el suelo','Convección del aire caliente','Radiación — el cartón bloqueó las ondas infrarrojas de la fogata','Equilibrio térmico directo'],a:2,f:'La persona recibía radiación infrarroja de la fogata. El cartón opaco bloquea esas ondas infrarrojas.'},
+{c:'El agua de una olla se calienta sola sin revolverla.',q:'¿Qué mecanismo distribuye el calor en toda el agua?',o:['Conducción de molécula en molécula','Convección — el agua caliente del fondo sube y la fría baja, distribuyendo el calor','Radiación del fondo caliente','Los tres en igual proporción'],a:1,f:'Convección: el agua caliente del fondo sube (menos densa), la fría baja. Corrientes circulares distribuyen el calor uniformemente.'},
+{c:'Los astronautas reciben calor del Sol a través del vacío del espacio.',q:'¿Qué mecanismo es el único que puede explicar esto?',o:['Conducción por partículas del espacio','Convección del viento solar','Radiación — ondas electromagnéticas que viajan por el vacío sin necesitar ningún material','Equilibrio térmico a distancia'],a:2,f:'Solo la radiación puede viajar por el vacío. El Sol emite ondas electromagnéticas que atraviesan 150 millones de km de vacío y calientan la estación espacial.'},
+{c:'¿Por qué no funciona envolver al niño con fiebre en una manta gruesa para bajarle la temperatura?',o:['La manta no conduce el calor del niño al exterior','La manta es aislante — reduce la pérdida de calor del cuerpo al ambiente, manteniendo o aumentando la fiebre','La manta aumenta la convección alrededor del cuerpo','La manta bloquea la radiación corporal útil'],a:1,f:'La manta actúa como aislante — reduce la conducción y convección del calor del cuerpo hacia el ambiente. El cuerpo retiene su calor y la fiebre se mantiene o sube. Lo correcto es descubrir al niño.'},
+]},
+cp5:{sci:'amo',qs:[
+{c:'Los cables eléctricos se instalan flojos en verano. En invierno se tensan solos.',q:'¿Qué explica el tensado en invierno?',o:['El peso del hielo y la nieve que se acumula','El metal se contrae con el frío — el cable se acorta. Si estuviera tenso al instalarlo, la contracción lo rompería','La electricidad genera calor que dilata los cables en verano','El viento los tensa en invierno'],a:1,f:'Contracción térmica: los metales se contraen al enfriarse. El cable se hace más corto en invierno. Si estuviera instalado tenso, esa contracción generaría fuerzas que podrían romperlo.'},
+{c:'Una botella completamente llena de agua se congela y el vidrio se rompe.',q:'¿Por qué?',o:['El vidrio se contrae más rápido que el agua','El agua al congelarse se expande — sin espacio, la presión del hielo rompe el vidrio','El frío agrieta el vidrio','El aire dentro explota'],a:1,f:'Anomalía del agua: al congelarse se expande. Sin espacio, la presión del hielo rompe el vidrio.'},
+{c:'La tapa metálica de un frasco está muy apretada.',q:'¿Por qué ponerla bajo agua caliente 10 segundos ayuda a abrirla?',o:['El agua caliente disuelve el adhesivo','El metal se dilata con el calor — el diámetro interior de la tapa aumenta levemente y la rosca se afloja','El calor ablanda el metal','El vapor crea presión dentro del frasco'],a:1,f:'Dilatación del metal: el diámetro interior de la tapa metálica aumenta ligeramente con el calor, lo suficiente para aflojar la rosca con el frasco de vidrio.'},
+{c:'El pavimento sin juntas de dilatación se "abomba" en días muy calurosos.',q:'¿Qué tipo de dilatación y qué principio lo explican?',o:['Dilatación superficial — el asfalto crece en largo y ancho pero sin espacio lateral se deforma hacia arriba','Solo dilatación lineal en el sentido longitudinal','Dilatación volumétrica hacia abajo','La dilatación del suelo empuja el asfalto'],a:0,f:'Dilatación superficial: el asfalto absorbe calor solar y crece en largo y ancho. Sin juntas de dilatación para absorber esa expansión, el único lugar disponible es hacia arriba — se "abomba".'},
+{c:'¿Por qué el hielo flota en el agua aunque casi todo lo demás se hunde al solidificarse?',o:['El hielo es hueco por dentro','Anomalía del agua: al congelarse el agua se expande y el hielo resulta menos denso que el agua líquida — menor densidad = flota','La tensión superficial del agua lo sostiene','El hielo flota solo en agua pura'],a:1,f:'Anomalía del agua: entre 0°C y 4°C el agua se contrae al calentarse (al contrario de casi todo). Esto hace que el hielo sea menos denso que el agua líquida — por eso flota.'},
+]},
+};
+
+// CIERRE T1 — JOULE
+CPQ.cpT1={sci:'jou',qs:[
+{c:'Cuchara de metal y mango de madera en el mismo cajón a 22°C.',q:'¿Por qué el metal se siente más frío?',o:['El metal está a menor temperatura real','El metal extrae calor de la mano más rápido — la pérdida veloz se percibe como frío','La madera genera calor propio','El metal refleja el calor corporal'],a:1,f:'Misma temperatura, diferente conductividad. El metal conduce bien = saca calor rápido = parece frío.'},
+{c:'El mar regula el clima de las ciudades costeras del Caribe colombiano.',q:'¿Qué propiedad del agua lo hace posible?',o:['La transparencia del agua','El alto calor específico — absorbe calor en verano y lo libera gradualmente en épocas frías','La convección constante del agua','La reflexión de la radiación solar'],a:1,f:'El alto calor específico del agua: necesita mucha energía para subir de temperatura y también libera mucha al enfriarse. Eso estabiliza el clima costero.'},
+{c:'Se mezclan 500 ml de agua a 10°C con 500 ml de agua a 70°C en recipiente aislado.',q:'¿Cuál es la temperatura de equilibrio?',o:['70°C','10°C','40°C — el promedio de las dos temperaturas','55°C'],a:2,f:'Con masas iguales del mismo material: T_eq = (10+70)/2 = 40°C.'},
+{c:'Los cables eléctricos entre postes se instalan deliberadamente flojos en verano.',q:'¿Por qué?',o:['Para que el viento los mueva sin romperlos','En invierno el cable se contrae — si estuviera tenso se rompería o derribaría el poste','Para reducir la resistencia eléctrica','Para facilitar el mantenimiento'],a:1,f:'Dilatación lineal: el cable se dilata en verano (flojo) y se contrae en invierno. Si estuviera tenso al instalar, la contracción invernal generaría fuerzas que lo podrían romper.'},
+{c:'Al abrir el congelador, el aire frío cae al suelo del cuarto.',q:'¿Qué mecanismo explica este movimiento?',o:['Conducción del frío por el suelo','Convección — el aire frío es más denso y desciende; el caliente sube a reemplazarlo','Radiación del frío del congelador','Equilibrio térmico directo entre el congelador y el suelo'],a:1,f:'Convección: el aire frío tiene mayor densidad que el caliente. El más denso desciende. El aire caliente sube a reemplazarlo — corriente de convección.'},
+{c:'Una lámina de metal al sol todo el día llega a 65°C. Otra igual, en la sombra, está a 25°C.',q:'¿Qué mecanismo llevó el calor al metal bajo el sol?',o:['Conducción por el suelo','Convección del viento caliente','Radiación solar — ondas que viajan por el espacio y llegan directamente al metal','Los tres en igual proporción'],a:2,f:'Radiación: el Sol emite ondas electromagnéticas que viajan por el vacío del espacio y calientan el metal directamente, sin necesitar contacto ni aire.'},
+{c:'El Sol calienta la Tierra a través de 150 millones de km de vacío.',q:'¿Por qué conducción y convección no pueden explicar esto?',o:['Son demasiado lentas para esas distancias','La conducción necesita contacto y la convección necesita fluido — el vacío no tiene ninguno de los dos','Solo funcionan a temperaturas menores de 100°C','Solo actúan en la atmósfera terrestre'],a:1,f:'Conducción: requiere materia en contacto. Convección: requiere fluido que circule. El vacío no tiene ninguno. Solo la radiación puede propagarse por el vacío.'},
+{c:'Una sartén de hierro vacía y una olla con 2 litros de agua reciben el mismo calor del fogón.',q:'¿Cuál alcanza mayor temperatura más rápido?',o:['La olla — tiene más masa','La sartén — el hierro tiene menor calor específico que el agua y sube más de temperatura con el mismo calor','Los dos a la misma velocidad','La olla si tiene tapa'],a:1,f:'El hierro tiene calor específico mucho menor que el agua. Con el mismo calor, el hierro sube mucho más de temperatura.'},
+{c:'El hielo flota en el agua.',q:'¿Qué consecuencia importante tiene esto para los ecosistemas acuáticos?',o:['Ninguna — los peces pueden vivir en el hielo igual que en el agua','El hielo flotante crea una capa aislante que protege el agua de abajo — los seres vivos sobreviven el invierno bajo esa capa','El hielo en la superficie enfría más el agua de abajo','El hielo produce oxígeno que los peces necesitan'],a:1,f:'El hielo flota por la anomalía del agua. Esa capa aislante protege el agua líquida de abajo, donde los organismos acuáticos sobreviven el invierno.'},
+{c:'Una persona tiene la mano en agua a 30°C. La mano está a 37°C.',q:'¿En qué dirección fluye el calor?',o:['Del agua al cuerpo — el agua absorbe el calor corporal porque está más fría','Del cuerpo al agua — el cuerpo (37°C) está más caliente que el agua (30°C)','En ambas direcciones simultáneamente','No fluye — la diferencia es muy pequeña'],a:1,f:'El calor SIEMPRE fluye del más caliente (cuerpo 37°C) al más frío (agua 30°C). El cuerpo cede calor al agua. Esa pérdida de calor se percibe como "frío".'},
+]};
+
+// CHECKPOINTS T2
+CPQ.cp6={sci:'fah',qs:[
+{c:'El agua hierve a diferente temperatura en Bogotá (2600 m) y Barranquilla (nivel del mar).',q:'¿Por qué esta diferencia?',o:['El agua de Bogotá tiene impurezas que cambian su punto de ebullición','La menor presión atmosférica en Bogotá hace que las moléculas necesiten menos energía para escapar al estado gaseoso','El frío de Bogotá requiere menos calor para hervir el agua','El agua tiene menor densidad a gran altitud'],a:1,f:'El punto de ebullición depende de la presión. A mayor altitud, menor presión. Las moléculas de agua escapan al estado gaseoso con menos energía — hierven a menor temperatura.'},
+{c:'Un bloque de hielo a 0°C recibe calor constantemente.',q:'¿Cuánto tiempo permanece la temperatura en 0°C?',o:['Solo un instante al comenzar la fusión','Todo el tiempo que dura la fusión — hasta que el último cristal de hielo se convierta en agua','La temperatura sube gradualmente mientras el hielo se derrite','La temperatura baja de 0°C durante la fusión'],a:1,f:'Durante toda la fusión la temperatura permanece en 0°C. Toda la energía va al calor latente. Solo cuando no quede hielo, la temperatura puede subir.'},
+{c:'El mercurio permanece líquido entre −39°C y 358°C.',q:'¿Por qué esto lo hace ideal para termómetros?',o:['Es el único metal líquido a temperatura ambiente','Permanece líquido en todo el rango de medición cotidiana y se dilata de manera muy constante y predecible','Tiene color plateado que facilita la lectura','Tiene alto calor específico que lo hace muy sensible'],a:1,f:'El mercurio cubre el rango de uso cotidiano y su coeficiente de dilatación es muy constante: cada grado produce el mismo aumento de volumen, lo que da lecturas precisas.'},
+{c:'El alcohol etílico hierve a 78.5°C y el agua a 100°C. Se mezclan y calientan.',q:'¿Qué ocurre primero?',o:['El agua hierve primero','El alcohol se vaporiza primero — llega antes a su punto de ebullición (78.5°C)','Los dos hierven al mismo tiempo','Ninguno hierve — la mezcla tiene punto de ebullición diferente'],a:1,f:'El alcohol alcanza primero su punto de ebullición (78.5°C). Este es el principio de la destilación para separar alcohol del agua.'},
+{c:'Durante un cambio de fase, ¿qué pasa con la temperatura si se sigue calentando?',o:['Sube más rápido que antes','Permanece constante — toda la energía va al calor latente, no a subir la temperatura','Baja porque el cambio de fase absorbe temperatura del entorno','Fluctúa alrededor del punto de cambio de fase'],a:1,f:'Durante cualquier cambio de fase la temperatura es constante. La energía va al calor latente — a cambiar el estado, no la temperatura.'},
+]};
+CPQ.cp7={sci:'cel',qs:[
+{c:'El vapor de la olla y el agua hirviendo están a 100°C.',q:'¿Por qué el vapor quema más al contacto con la piel?',o:['El vapor se mueve más rápido y ejerce más presión','Al condensarse en la piel, el vapor libera el calor latente de vaporización — energía extra que el agua líquida no tiene','El vapor tiene mayor temperatura real','El vapor penetra más profundo en la piel'],a:1,f:'Calor latente: el vapor al condensarse libera la energía que acumuló durante la vaporización. El agua líquida a 100°C no tiene esa energía extra almacenada.'},
+{c:'Las bolas de naftalina del ropero desaparecen sin dejar charco.',q:'¿Qué cambio de fase ocurre?',o:['Evaporación del naftaleno líquido incoloro','Sublimación — sólido pasa directamente a gas sin fase líquida','Fusión invisible seguida de evaporación','Condensación inversa'],a:1,f:'Sublimación: sólido a gas directamente, sin pasar por líquido. Por eso no hay charco.'},
+{c:'¿Cuál es la diferencia principal entre evaporación y ebullición?',o:['Evaporación solo a 100°C, ebullición a cualquier temperatura','Evaporación en la superficie a cualquier temperatura; ebullición en toda la masa a la temperatura exacta de ebullición','La evaporación es más rápida que la ebullición','Solo el agua puede experimentar ebullición'],a:1,f:'Evaporación: superficie, cualquier temperatura, lenta, sin burbujas. Ebullición: toda la masa, temperatura específica, con burbujas visibles.'},
+{c:'Gotitas de rocío aparecen en las plantas en madrugadas frías.',q:'¿Qué cambio de fase lo produjo?',o:['Fusión del hielo del ambiente','Condensación — el vapor del aire caliente pasó a líquido al tocar las superficies frías de las plantas','Precipitación de lluvia muy fina','Sublimación inversa del hielo'],a:1,f:'Condensación: el vapor (gas) del aire toca las superficies frías y pasa al estado líquido formando las gotitas de rocío.'},
+{c:'El sudor refresca el cuerpo aunque el ambiente esté caliente.',q:'¿Por qué?',o:['El sudor es un líquido frío producido por las glándulas','Al evaporarse, el sudor absorbe calor latente de la piel — extrae energía del cuerpo y lo enfría','El sudor aumenta la conductividad de la piel','El movimiento del sudor crea convección que aleja el calor'],a:1,f:'Calor latente de vaporización: el sudor al evaporarse toma energía directamente de la piel. Esa extracción de energía enfría la superficie corporal.'},
+]};
+CPQ.cp8={sci:'kel',qs:[
+{c:'La gráfica de calentamiento tiene una zona horizontal a 0°C.',q:'¿Qué ocurre en esa zona?',o:['El calor se acumula para luego subir más rápido','El hielo se funde — toda la energía va al calor latente y la temperatura permanece en 0°C','El termómetro tiene error','El agua alcanzó su temperatura mínima'],a:1,f:'La zona horizontal a 0°C es la fusión. Toda la energía va al calor latente de fusión. La temperatura no sube hasta que no quede hielo.'},
+{c:'El tramo horizontal a 100°C en la gráfica es más largo que el de 0°C.',q:'¿Qué indica?',o:['El fogón pierde potencia a temperaturas altas','El calor latente de vaporización es mayor que el de fusión — más energía para vaporizar que para fundir','Hay más agua que hielo en el sistema','La temperatura de 100°C es más difícil de mantener'],a:1,f:'El calor latente de vaporización es ~7 veces mayor que el de fusión. Se necesita mucho más tiempo (más energía) para vaporizar toda el agua.'},
+{c:'¿Qué representan los tramos inclinados en la gráfica de calentamiento?',o:['El fogón se apaga y enciende','Cambio de temperatura sin cambio de estado — la energía aumenta la agitación molecular','Dos estados coexistiendo','El sistema pierde calor al ambiente'],a:1,f:'Tramos inclinados = cambio de temperatura. La energía va a aumentar la agitación molecular — lo que se manifiesta como aumento de temperatura.'},
+{c:'¿Cuántas veces permanece constante la temperatura al enfriar vapor desde 110°C hasta hielo a −5°C?',o:['Una sola vez — al congelarse el agua','Dos veces — condensación a 100°C y solidificación a 0°C','Tres veces — a 100°C, 50°C y 0°C','La temperatura nunca permanece constante al enfriar'],a:1,f:'Dos cambios de fase al enfriar: condensación a 100°C (gas→líquido) y solidificación a 0°C (líquido→sólido). En cada uno la temperatura es constante.'},
+{c:'¿Por qué aunque el fogón esté al máximo el agua no supera 100°C mientras hierve?',o:['El fogón pierde potencia','Toda la energía del fogón va al calor latente de vaporización — a convertir agua en vapor, no a subir la temperatura','El agua no puede absorber más calor después de 100°C','El termómetro tiene límite de 100°C'],a:1,f:'La energía del fogón va al calor latente de vaporización, no a subir la temperatura. La temperatura permanece en 100°C hasta que no quede agua líquida.'},
+]};
+CPQ.cpT2={sci:'car',qs:[
+{c:'El agua hierve a diferente temperatura según la altitud.',q:'¿Qué determina el punto de ebullición?',o:['La composición química del agua en cada ciudad','La presión atmosférica — mayor altitud = menor presión = menor punto de ebullición','La temperatura promedio de la ciudad','La velocidad de calentamiento del agua'],a:1,f:'El punto de ebullición depende de la presión. A mayor altitud, menor presión atmosférica, menor punto de ebullición.'},
+{c:'En la gráfica de calentamiento del agua, ¿en cuáles etapas la temperatura NO cambia?',o:['Solo en la primera — cuando el hielo empieza a calentarse','En la fusión (0°C) y en la vaporización (100°C)','En las etapas 1, 3 y 5 — las inclinadas','En todas las etapas'],a:1,f:'La temperatura es constante durante los cambios de fase: fusión a 0°C y vaporización a 100°C. En esas etapas toda la energía va al calor latente.'},
+{c:'El vapor a 100°C quema más que el agua a 100°C.',q:'¿Por qué si tienen la misma temperatura?',o:['El vapor tiene mayor presión','Al condensarse en la piel, el vapor libera el calor latente de vaporización — energía extra que el agua líquida no tiene','El vapor tiene mayor temperatura real','El vapor penetra más profundo'],a:1,f:'Calor latente: el vapor tiene energía "oculta" acumulada durante la vaporización. Al condensarse la libera sobre la piel. El agua líquida no la tiene.'},
+{c:'Las bolas de naftalina desaparecen sin dejar charco.',q:'¿Qué cambio de fase ocurre?',o:['Evaporación del naftaleno líquido','Sublimación — sólido a gas directamente','Fusión invisible','Condensación inversa'],a:1,f:'Sublimación: sólido a gas directamente, sin fase líquida.'},
+{c:'La ropa mojada se seca al sol a 25°C.',q:'¿Qué proceso la seca?',o:['Ebullición a baja temperatura','Evaporación — las moléculas de la superficie se escapan al aire a cualquier temperatura','Sublimación del agua','Vaporización instantánea por el sol'],a:1,f:'Evaporación: proceso de vaporización en la superficie del líquido que ocurre a cualquier temperatura.'},
+{c:'El rocío aparece en las plantas en madrugadas frías.',q:'¿Qué cambio de fase lo produjo?',o:['Precipitación de lluvia fina','Condensación — el vapor del aire se convirtió en líquido al tocar superficies frías','Fusión del hielo atmosférico','Sublimación inversa del agua'],a:1,f:'Condensación: el vapor (gas) del aire toca superficies frías y pasa al estado líquido.'},
+{c:'¿En cuál estado de la materia tienen mayor energía cinética las moléculas?',o:['Sólido — están más juntas','Líquido — tienen libertad de movimiento','Gas — moléculas muy separadas moviéndose libremente a alta velocidad','En todos los estados la energía es igual'],a:2,f:'En el estado gaseoso las moléculas se mueven libremente a alta velocidad — máxima energía cinética. Por eso la vaporización requiere tanta energía.'},
+{c:'Al enfriar vapor desde 120°C hasta hielo a −10°C, ¿cuántas veces la temperatura permanece constante?',o:['Una — solo al congelarse','Dos — condensación (100°C) y solidificación (0°C)','Tres — a 100°C, 50°C y 0°C','Nunca — baja continuamente'],a:1,f:'Dos cambios de fase: condensación a 100°C (gas→líquido) y solidificación a 0°C (líquido→sólido). En cada uno la temperatura es constante por el calor latente.'},
+{c:'¿Por qué la olla a presión cocina más rápido?',o:['La presión calienta el agua más rápido','La mayor presión eleva el punto de ebullición del agua — puede llegar a ~120°C antes de hervir y cocina más rápido','La tapa sellada evita la pérdida de calor latente','La presión comprime los alimentos haciéndolos más pequeños'],a:1,f:'Mayor presión = mayor punto de ebullición. El agua puede llegar a ~120°C sin hervir. A mayor temperatura de cocción, los procesos son más rápidos.'},
+{c:'El tramo de vaporización en la gráfica es más largo que el de fusión.',q:'¿Qué indica sobre los calores latentes?',o:['El fogón pierde potencia a altas temperaturas','El calor latente de vaporización es mucho mayor que el de fusión — más energía para vaporizar que para fundir','Hay más agua que hielo','La temperatura de 100°C es más difícil de mantener'],a:1,f:'El calor latente de vaporización es ~7 veces mayor que el de fusión. Por eso el tramo horizontal a 100°C es mucho más largo en la gráfica.'},
+]};
+
+// EVALUACIÓN FINAL DE CURSO (10 preguntas combinadas T1+T2)
+CPQ.cpFin={sci:null,qs:[
+{c:'Se mezclan 300 ml de agua a 90°C con 300 ml de agua a 10°C en recipiente aislado.',q:'¿Cuál es la temperatura de equilibrio y qué principio físico la determina?',o:['90°C — el agua caliente siempre domina','50°C — con masas iguales del mismo material la temperatura de equilibrio es el promedio (equilibrio térmico)','10°C — el agua fría siempre domina','60°C — el agua caliente aporta más energía'],a:1,f:'Equilibrio térmico con masas iguales: T_eq = (90+10)/2 = 50°C.'},
+{c:'Una sartén de hierro vacía y una olla con 2 litros de agua reciben el mismo calor del fogón.',q:'¿Cuál llega a mayor temperatura y por qué?',o:['La olla de agua — tiene más masa y absorbe más calor','La sartén — el hierro tiene menor calor específico y sube más de temperatura con el mismo calor','Las dos igual — mismo calor, mismo fogón','La sartén solo si es más pequeña en volumen'],a:1,f:'El hierro tiene calor específico mucho menor que el agua. Con el mismo calor, el hierro sube mucho más de temperatura.'},
+{c:'Una botella completamente llena de agua se congela y el vidrio se rompe.',q:'¿Qué propiedad del agua explica la ruptura?',o:['El vidrio es frágil al frío','La anomalía del agua: al congelarse se expande y la presión del hielo rompe el vidrio','El cambio brusco de temperatura fractura el vidrio','El aire dentro del agua explota al congelarse'],a:1,f:'Anomalía del agua: al congelarse se expande (necesita más volumen). Sin espacio, la presión del hielo rompe el vidrio.'},
+{c:'A 3 metros de una fogata en el patio, sin viento, sientes calor intenso en la cara.',q:'¿Qué mecanismo lleva el calor de la fogata a tu cara?',o:['Conducción por el suelo hasta tus pies','Convección del aire caliente de la fogata','Radiación — la fogata emite ondas infrarrojas que viajan directamente a tu piel','Equilibrio térmico directo'],a:2,f:'Radiación: ondas infrarrojas que viajan sin necesitar el aire. Por eso el calor llega aunque no haya viento.'},
+{c:'El vapor de la olla y el agua hirviendo están ambos a 100°C.',q:'¿Por qué el vapor quema mucho más al contacto con la piel?',o:['El vapor tiene mayor temperatura real','Al condensarse en la piel, el vapor libera el calor latente de vaporización acumulado — energía extra que el agua líquida no tiene','El vapor ejerce mayor presión sobre la piel','El vapor penetra más profundo en los tejidos'],a:1,f:'Calor latente: el vapor al condensarse libera la energía que acumuló durante la vaporización. El agua líquida a 100°C no tiene esa energía extra almacenada.'},
+{c:'En una mañana fría: gotitas de rocío en las plantas, vidrio del carro empañado y niebla en la montaña.',q:'¿Qué cambio de fase es común a los tres fenómenos?',o:['Fusión del hielo del ambiente','Condensación — el vapor del aire caliente se convierte en líquido al tocar superficies o capas de aire frío','Evaporación del agua del suelo','Sublimación del hielo de la atmósfera'],a:1,f:'Los tres son condensación: el vapor (gas) del aire toca superficies frías (hojas, vidrio) o capas de aire frío (niebla) y pasa al estado líquido.'},
+{c:'Las llantas tienen más presión a las 2 pm que a las 5 am. Los rieles del tren tienen juntas de separación.',q:'¿Qué fenómeno físico explica ambas situaciones?',o:['El desgaste mecánico por uso','La dilatación térmica — los materiales se expanden con el calor (gases mucho más que sólidos)','El aumento de masa con la temperatura','La contracción de los materiales con el calor'],a:1,f:'Dilatación térmica: todos los materiales se expanden al calentarse. Los gases (aire de llantas) se dilatan mucho más que los sólidos (rieles de tren).'},
+{c:'El sudor refresca el cuerpo. La ropa mojada se seca al sol a 25°C.',q:'¿Qué proceso físico es común a los dos?',o:['Ebullición a baja temperatura','Evaporación — el agua en la superficie se vaporiza a cualquier temperatura, absorbiendo calor latente del entorno','Sublimación del agua','Condensación del vapor ambiente sobre la piel'],a:1,f:'Evaporación: en ambos casos el agua en la superficie se vaporiza a temperatura ambiente, absorbiendo calor latente. Del cuerpo en el sudor, del ambiente en la ropa.'},
+{c:'En Bogotá (2600 m) la comida tarda más en cocinarse que en Barranquilla, aunque el agua hierva en los dos lugares.',q:'¿Por qué?',o:['El agua de Bogotá tiene más minerales que la endurecen','En Bogotá el agua hierve a ~92°C (menor presión) — a menor temperatura de cocción, los procesos de cocción son más lentos','El frío de Bogotá enfría la comida mientras se cocina','El agua de Bogotá tiene menor calor específico'],a:1,f:'El punto de ebullición en Bogotá es ~92°C (menor presión). A menor temperatura, los procesos físicos y químicos de la cocción son más lentos.'},
+{c:'Un termómetro de mercurio se mete en agua caliente: el mercurio sube. Se mete en el congelador: el mercurio baja.',q:'¿Qué principio físico explica el comportamiento del mercurio?',o:['La presión del líquido empuja el mercurio','La dilatación y contracción térmica — el mercurio se dilata al calentarse y se contrae al enfriarse','El mercurio es magnético y reacciona a los campos del calor','El termómetro tiene un resorte interno que lo regula'],a:1,f:'Dilatación y contracción térmica: el mercurio se dilata al calentarse (sube en el tubo) y se contrae al enfriarse (baja). El tubo delgadísimo hace que pequeños cambios de volumen sean grandes cambios de altura visible.'},
+]};
+// ══ JUEGO Y SIMULACRO ══
+const GQ=[
+{c:'Dirección del flujo de calor.',q:'¿En qué dirección fluye espontáneamente el calor entre dos cuerpos?',o:['Del frío al caliente','Del caliente al frío','En ambas direcciones','Solo si se tocan'],a:1},
+{c:'Calor específico del agua.',q:'¿Por qué el mar está fresco al mediodía aunque la arena esté quemando?',o:['El mar está más profundo','El agua tiene calor específico muy alto — necesita mucho más calor para subir la misma temperatura','La brisa marina lo refresca','La sal absorbe el calor solar'],a:1},
+{c:'Mecanismo por el vacío.',q:'¿Cuál mecanismo puede transmitir calor a través del vacío total del espacio?',o:['Conducción','Convección','Radiación','Los tres por igual'],a:2},
+{c:'Llantas con más presión al mediodía.',q:'¿Por qué las llantas tienen más presión a las 2 pm sin que nadie las inflara?',o:['El sol derrite el caucho','El aire dentro se dilata con el calor y ejerce más presión','La velocidad del carro infla las llantas','El calor del asfalto comprime el aire'],a:1},
+{c:'Agua hirviendo con fogón al máximo.',q:'¿Por qué el termómetro permanece en 100°C aunque el fogón esté al máximo?',o:['El fogón pierde potencia','Toda la energía va al calor latente de vaporización, no a subir la temperatura','El termómetro falla a 100°C','El agua no absorbe más calor'],a:1},
+{c:'Juntas de separación en rieles de tren.',q:'¿Para qué sirven las juntas de separación entre segmentos del riel?',o:['Para reducir el ruido','Para que el metal pueda dilatarse en verano sin doblarse','Para facilitar el mantenimiento','Para el drenaje del agua'],a:1},
+{c:'El hielo flota en el agua.',q:'¿Por qué el hielo flota en lugar de hundirse?',o:['El hielo es hueco','Anomalía del agua: al congelarse se expande y el hielo es menos denso que el agua líquida','La tensión superficial lo sostiene','Solo flota en agua dulce'],a:1},
+{c:'El sudor refresca.',q:'¿Por qué el sudor refresca el cuerpo aunque el ambiente esté caliente?',o:['El sudor es un líquido frío','Al evaporarse absorbe calor latente directamente de la piel','El sudor refleja la radiación solar','El sudor tiene sales que absorben el calor'],a:1},
+{c:'Naftalina del ropero.',q:'¿Qué cambio de fase explica que las bolas de naftalina se encogen sin dejar charco?',o:['Evaporación lenta','Fusión invisible','Sublimación — de sólido a gas directamente','Condensación inversa'],a:2},
+{c:'Rocío en las plantas al amanecer.',q:'¿Qué cambio de fase produjo el rocío?',o:['Fusión del hielo del aire','Condensación — el vapor del aire se convirtió en líquido al tocar las superficies frías','Precipitación de lluvia fina','Sublimación inversa del agua'],a:1},
+{c:'Ropa secándose al sol a 25°C.',q:'¿Cómo se seca la ropa sin llegar a 100°C?',o:['Ebullición a baja temperatura','Evaporación — las moléculas de la superficie se escapan al aire a cualquier temperatura','Sublimación del agua','Vaporización instantánea'],a:1},
+{c:'Vapor vs agua a 100°C.',q:'¿Por qué el vapor quema más que el agua si ambos están a 100°C?',o:['El vapor tiene mayor temperatura real','Al condensarse libera el calor latente de vaporización — energía extra que el agua líquida no tiene','El vapor tiene más presión','El vapor penetra más profundo'],a:1},
+{c:'Metal frío vs madera a igual temperatura.',q:'¿Por qué el metal frío se siente más frío que la madera a la misma temperatura?',o:['El metal está realmente más frío','El metal extrae calor de la mano más rápido — alta conductividad, pérdida veloz, se siente frío intenso','La madera genera calor propio','El metal refleja el calor corporal'],a:1},
+{c:'Mezcla de agua a 80°C y 20°C en partes iguales.',q:'¿Cuál es la temperatura de equilibrio?',o:['80°C','20°C','50°C','60°C'],a:2},
+{c:'Bogotá vs Barranquilla para cocinar.',q:'¿Por qué la comida tarda más en cocinarse en Bogotá que en Barranquilla?',o:['El agua de Bogotá tiene más minerales','La menor presión en Bogotá hace que el agua hierva a ~92°C — menor temperatura de cocción','El frío de Bogotá enfría la comida','El agua tiene menos densidad en altura'],a:1},
+{c:'Periódico alrededor del termo.',q:'¿Por qué envolver el termo con periódico lo mantiene caliente más tiempo?',o:['El papel refleja las ondas de calor','El papel es mal conductor — retarda la transferencia de calor al aire frío exterior','El papel bloquea la convección del aire','El papel mantiene la presión interna'],a:1},
+{c:'Zonas horizontales en la gráfica.',q:'¿Qué representan las zonas horizontales en la gráfica de calentamiento del agua?',o:['El fogón se apaga temporalmente','Cambios de fase a temperatura constante — toda la energía va al calor latente','El agua acumula calor para subir más rápido','Errores del termómetro'],a:1},
+{c:'Botella llena de agua en el congelador.',q:'¿Por qué el vidrio se rompe?',o:['El vidrio se contrae más que el agua','El agua al congelarse se expande — la presión del hielo rompe el vidrio','El frío hace frágil el vidrio','El aire dentro explota'],a:1},
+{c:'Conducción en sólidos.',q:'¿Cómo viaja el calor por conducción en un sólido?',o:['Las moléculas calientes se desplazan físicamente','La energía pasa de molécula en molécula sin que la materia se desplace','El calor viaja en ondas por el sólido','Las moléculas frías atraen el calor del entorno'],a:1},
+{c:'Mercurio en termómetros.',q:'¿Por qué el mercurio es ideal para termómetros?',o:['Es el único metal líquido a temperatura ambiente','Permanece líquido en amplio rango cotidiano y se dilata de manera muy constante y predecible','Tiene color plateado que facilita la lectura','Tiene alto calor específico'],a:1},
+];
+
+const SIMQ=[
+{c:'El termómetro clínico se coloca bajo el brazo durante 3 minutos.',q:'¿Qué proceso físico explica que finalmente marque la temperatura exacta del cuerpo?',o:['A) La presión del brazo comprime el mercurio al nivel correcto','B) El termómetro alcanza equilibrio térmico con el cuerpo — intercambian calor hasta estar a la misma temperatura','C) El cuerpo emite radiación que el mercurio absorbe y convierte en temperatura','D) El mercurio reacciona químicamente con el calor corporal'],a:1,comp:'Explicación de fenómenos'},
+{c:'El calor siempre fluye del cuerpo más caliente al más frío.',q:'Un estudiante dice que "el hielo enfrió la bebida porque le transfirió su frío". ¿Es correcta esa afirmación?',o:['A) Sí — el frío es energía que puede transferirse','B) No — solo el calor fluye, del cuerpo caliente (bebida) hacia el frío (hielo)','C) Sí — pero solo cuando el hielo está sumergido directamente','D) No — el hielo actúa como aislante sin intercambiar energía'],a:1,comp:'Uso comprensivo'},
+{c:'Los ingenieros deben considerar la dilatación térmica en sus diseños.',q:'Los rieles del tren tienen juntas de separación y los cables eléctricos se instalan flojos. ¿Qué fenómeno físico justifica ambas decisiones?',o:['A) El desgaste mecánico por uso continuo','B) La dilatación y contracción térmica — los materiales cambian de tamaño con la temperatura','C) La conductividad eléctrica que varía con la temperatura','D) La corrosión diferencial entre materiales'],a:1,comp:'Uso comprensivo'},
+{c:'Los astronautas en la Estación Espacial reciben calor del Sol a través del vacío del espacio.',q:'¿Cuál mecanismo de transmisión del calor lo hace posible?',o:['A) Conducción a través de partículas microscópicas del espacio','B) Convección del viento solar extendido','C) Radiación — el Sol emite ondas electromagnéticas que viajan por el vacío sin necesitar ningún material','D) Equilibrio térmico a distancia por efecto gravitacional'],a:2,comp:'Explicación de fenómenos'},
+{c:'Aunque el fogón esté al máximo, el agua hierve a 100°C y el termómetro no sube más.',q:'¿Por qué la temperatura no puede superar los 100°C mientras haya agua líquida?',o:['A) El fogón pierde potencia a temperaturas altas','B) Toda la energía del fogón va al calor latente de vaporización — a convertir agua en vapor, no a subir la temperatura','C) El termómetro tiene límite máximo de lectura en 100°C','D) El agua ya no puede absorber más calor una vez que está hirviendo'],a:1,comp:'Explicación de fenómenos'},
+{c:'El agua tiene una anomalía única al congelarse: se expande en lugar de contraerse.',q:'¿Qué consecuencia tiene para los ecosistemas acuáticos que el hielo flote?',o:['A) Ninguna — los peces pueden vivir en el hielo igual que en el agua','B) El hielo flotante crea una capa aislante que protege el agua líquida de abajo, donde los organismos sobreviven el invierno','C) Solo los peces de la superficie morirían','D) El hielo produce oxígeno adicional que los peces necesitan'],a:1,comp:'Indagación'},
+{c:'En Bogotá (2600 m de altitud) el agua hierve a ~92°C.',q:'¿Qué consecuencia práctica tiene esto para cocinar?',o:['A) El agua en Bogotá hierve más rápido porque necesita menos calor','B) Los alimentos tardan más en cocinarse porque el agua hierve a menor temperatura','C) El agua es más pura en Bogotá porque hierve a menor temperatura','D) No hay diferencia — la comida se cocina igual en cualquier altitud'],a:1,comp:'Uso comprensivo'},
+{c:'Las bolas de naftalina del ropero se hacen más pequeñas sin dejar charco de líquido.',q:'¿Qué cambio de fase explica esto?',o:['A) Evaporación lenta del naftaleno líquido incoloro','B) Sublimación — el naftaleno pasa directamente de sólido a gas sin pasar por líquido','C) Fusión invisible seguida de evaporación instantánea','D) Condensación inversa de las moléculas sólidas'],a:1,comp:'Uso comprensivo'},
+{c:'El sudor es el mecanismo de refrigeración natural del cuerpo humano.',q:'¿Por qué el sudor refresca aunque el ambiente esté caliente y el sudor no sea frío?',o:['A) El sudor contiene sales que absorben el calor del cuerpo','B) Al evaporarse, el sudor absorbe calor latente de vaporización directamente de la piel','C) El sudor aumenta la conductividad de la piel','D) El movimiento del sudor al escurrir crea convección que aleja el calor'],a:1,comp:'Explicación de fenómenos'},
+{c:'Los mangos de las ollas se fabrican de madera o plástico, no de metal.',q:'¿Por qué esta decisión de diseño protege de quemaduras?',o:['A) El plástico y la madera son más económicos','B) Son malos conductores térmicos — el calor tarda mucho más en llegar del cuerpo de la olla al mango','C) El metal es demasiado pesado para el mango','D) El plástico resiste mejor las altas temperaturas que el metal'],a:1,comp:'Uso comprensivo'},
+{c:'Las gráficas de temperatura vs tiempo muestran zonas horizontales e inclinadas.',q:'¿Qué representan las zonas horizontales en la gráfica de calentamiento del agua?',o:['A) Los momentos en que el fogón se apaga temporalmente','B) Los cambios de fase del agua a temperatura constante: fusión a 0°C y vaporización a 100°C','C) Las temperaturas máximas que puede alcanzar el sistema','D) Los períodos en que el agua pierde calor hacia el ambiente'],a:1,comp:'Indagación'},
+{c:'El vapor de la olla y el agua hirviendo están ambos a 100°C.',q:'¿Por qué una quemadura con vapor es más severa?',o:['A) El vapor se desplaza más rápido y ejerce más presión','B) Al condensarse en la piel, el vapor libera el calor latente de vaporización — energía extra que el agua líquida no tiene','C) El vapor tiene temperatura real mayor aunque el termómetro marque lo mismo','D) El vapor penetra más profundo en los tejidos'],a:1,comp:'Explicación de fenómenos'},
+{c:'La convección es el mecanismo de transmisión del calor en fluidos.',q:'¿Por qué el agua de una olla se calienta uniformemente aunque solo el fondo esté en el fogón?',o:['A) Conducción — el calor viaja de molécula en molécula desde el fondo','B) Convección — el agua caliente del fondo sube (menos densa) y la fría baja, distribuyendo el calor','C) Radiación — el fondo caliente emite ondas que calientan el agua superior','D) Los tres mecanismos en igual proporción'],a:1,comp:'Explicación de fenómenos'},
+{c:'Las ciudades costeras del Caribe colombiano tienen climas más estables que ciudades del interior.',q:'¿Qué propiedad del agua del mar lo explica?',o:['A) El viento del mar regula constantemente la temperatura','B) El alto calor específico del agua — absorbe mucho calor en épocas cálidas y lo libera gradualmente en las frías','C) La humedad del mar evita que las temperaturas sean extremas','D) La presión del mar compensa los cambios de temperatura del interior'],a:1,comp:'Indagación'},
+{c:'Al añadir hielo a una bebida caliente, mientras el hielo se derrite la temperatura no baja de 0°C.',q:'¿Por qué?',o:['A) El hielo genera una barrera que bloquea el calor de la bebida','B) Mientras haya hielo, toda la energía que llega va al calor latente de fusión — la temperatura permanece en 0°C hasta que todo el hielo se derrita','C) La temperatura ya no puede bajar más — 0°C es el mínimo posible','D) El vaso actúa como aislante que mantiene la temperatura constante'],a:1,comp:'Uso comprensivo'},
+{c:'Se recomienda verificar la presión de las llantas siempre en frío (madrugada), no al mediodía.',q:'¿Por qué?',o:['A) Al mediodía las llantas están más desgastadas','B) El aire dentro se calienta al mediodía, se dilata y aumenta la presión — la lectura en caliente no refleja la presión real de trabajo','C) El manómetro funciona mejor en temperaturas bajas','D) La fricción del movimiento comprime el aire de las llantas durante el día'],a:1,comp:'Uso comprensivo'},
+{c:'Al enfriar vapor de agua desde 110°C hasta hielo a −5°C, ¿cuántas veces permanece constante la temperatura?',o:['A) Una sola vez — al congelarse el agua','B) Dos veces — durante la condensación (100°C) y durante la solidificación (0°C)','C) Tres veces — a 100°C, 50°C y 0°C','D) La temperatura nunca permanece constante al enfriarse'],a:1,comp:'Indagación'},
+{c:'El equilibrio térmico es la base del funcionamiento de muchos instrumentos.',q:'¿Por qué se recomienda calentar la taza antes de servir el espresso?',o:['A) Para esterilizarla antes de usarla','B) Para evitar que la taza fría absorba calor del café por equilibrio térmico, manteniendo la bebida más caliente','C) Por una tradición cultural sin base física','D) Para que la cerámica se expanda y quepa más café'],a:1,comp:'Uso comprensivo'},
+{c:'En el sancocho: el fogón calienta la olla, el agua distribuye el calor sola, y el cocinero siente calor en la cara.',q:'¿Qué mecanismo opera en cada caso, respectivamente?',o:['A) Convección, conducción, radiación','B) Conducción (fogón→olla), convección (agua), radiación (cara del cocinero)','C) Radiación, conducción, convección','D) Los tres mecanismos actúan igual en cada caso'],a:1,comp:'Uso comprensivo'},
+{c:'El alto calor específico del agua y su anomalía al congelarse son propiedades únicas.',q:'¿Cuál de las siguientes afirmaciones describe correctamente su importancia para la vida en la Tierra?',o:['A) El alto calor específico estabiliza el clima y la anomalía permite que los ecosistemas acuáticos sobrevivan el invierno — sin estas propiedades la vida sería muy diferente','B) Estas propiedades solo importan en laboratorios de química','C) El calor específico es importante pero la anomalía del agua no tiene consecuencias prácticas para la vida','D) Estas propiedades son exclusivas del agua pura y no aplican al agua natural'],a:0,comp:'Indagación'},
+];
+// ══ GENERAR TESTS Y CHECKPOINTS ══
+const TESTS=[
+  {id:'t01',lb:'Test — Calor y Temperatura',qk:'qt1',gr:'Tema 1 · Calor y Temperatura'},
+  {id:'t02',lb:'Test — Calor y variación de temperatura',qk:'qt2',gr:'Tema 1 · Calor y Temperatura'},
+  {id:'t03',lb:'Test — El equilibrio térmico',qk:'qt3',gr:'Tema 1 · Calor y Temperatura'},
+  {id:'t04',lb:'Test — La transmisión del calor',qk:'qt4',gr:'Tema 1 · Calor y Temperatura'},
+  {id:'t05',lb:'Test — La dilatación',qk:'qt5',gr:'Tema 1 · Calor y Temperatura'},
+  {id:'t06',lb:'Test — Punto de fusión y ebullición',qk:'qt6',gr:'Tema 2 · Fases de la Materia'},
+  {id:'t07',lb:'Test — Cambios de fase',qk:'qt7',gr:'Tema 2 · Fases de la Materia'},
+  {id:'t08',lb:'Test — Gráficas de cambios de fase',qk:'qt8',gr:'Tema 2 · Fases de la Materia'},
+];
+TESTS.forEach(t=>{
+  addS(t.id,t.lb,'❓',t.gr,
+    `<div class="sh"><div class="stit">${t.lb}</div><div class="ssub">5 preguntas · opciones aleatorizadas · feedback con explicación</div></div>
+     <div id="qw-${t.id}" style="flex:1;display:flex;flex-direction:column;overflow:hidden;"></div>`,
+    ()=>initQ(t.id,QDB[t.qk],5,false));
+});
+
+const CPS=[
+  {id:'c01',lb:'Checkpoint · Antoine Lavoisier',ck:'cp1',gr:'Tema 1 · Calor y Temperatura'},
+  {id:'c02',lb:'Checkpoint · Benjamin Thompson',ck:'cp2',gr:'Tema 1 · Calor y Temperatura'},
+  {id:'c03',lb:'Checkpoint · Joseph Black',ck:'cp3',gr:'Tema 1 · Calor y Temperatura'},
+  {id:'c04',lb:'Checkpoint · Jean-Baptiste Fourier',ck:'cp4',gr:'Tema 1 · Calor y Temperatura'},
+  {id:'c05',lb:'Checkpoint · Guillaume Amontons',ck:'cp5',gr:'Tema 1 · Calor y Temperatura'},
+  {id:'cT1',lb:'⭐ Cierre Tema 1 · James Prescott Joule',ck:'cpT1',gr:'Tema 1 · Calor y Temperatura'},
+  {id:'c06',lb:'Checkpoint · Daniel Gabriel Fahrenheit',ck:'cp6',gr:'Tema 2 · Fases de la Materia'},
+  {id:'c07',lb:'Checkpoint · Anders Celsius',ck:'cp7',gr:'Tema 2 · Fases de la Materia'},
+  {id:'c08',lb:'Checkpoint · Lord Kelvin',ck:'cp8',gr:'Tema 2 · Fases de la Materia'},
+  {id:'cT2',lb:'⭐ Cierre Tema 2 · Sadi Carnot',ck:'cpT2',gr:'Tema 2 · Fases de la Materia'},
+];
+CPS.forEach(cp=>{
+  const d=CPQ[cp.ck];const s=SCI[d.sci];const nq=d.qs.length;
+  addS(cp.id,cp.lb,'✅',cp.gr,
+    `<div class="scicard">
+       <div class="sciface">${s.e}</div>
+       <div style="flex:1;">
+         <div class="sciname">${s.n}</div>
+         <div class="sciyear">${s.y} · ${s.nat}</div>
+         <div class="scidesc">${s.c}</div>
+         <div class="scidata">💡 ${s.d}</div>
+       </div>
+     </div>
+     <div class="sh" style="margin-bottom:6px;"><div class="stit">${cp.lb}</div>
+     <div class="ssub">${nq} preguntas · opciones aleatorizadas · vidas + cronómetro 30s</div></div>
+     <div id="qw-${cp.id}" style="flex:1;display:flex;flex-direction:column;overflow:hidden;"></div>`,
+    ()=>initQ(cp.id,d.qs,nq,true));
+});
+
+// EVALUACIÓN FINAL DE CURSO
+addS('s49','🎯 Evaluación Final de Curso','🎯','Evaluación Final y Cierre',`
+<div class="cc cf" style="flex-shrink:0;">
+  <h3>🎯 Evaluación Final de Curso</h3>
+  <p>Este examen combina conceptos del <strong>Tema 1 (Calor y Temperatura)</strong> y el <strong>Tema 2 (Fases de la Materia)</strong>. Las preguntas tipo ICFES requieren aplicar varios conceptos a la vez en situaciones de la vida real.</p>
+</div>
+<div class="sh" style="margin-bottom:6px;">
+  <div class="stit">Evaluación Final · 10 preguntas combinadas</div>
+  <div class="ssub">Temas 1 y 2 combinados · opciones aleatorizadas · vidas + cronómetro 30s</div>
+</div>
+<div id="qw-s49" style="flex:1;display:flex;flex-direction:column;overflow:hidden;"></div>`,
+  ()=>initQ('s49',CPQ.cpFin.qs,10,true));
+
+// JUEGO
+addS('s50','🎮 Juego ICFES — Modo Presión','🎮','Evaluación Final y Cierre',`
+<div class="sh"><div class="stit">🎮 Juego ICFES · Modo Presión</div>
+<div class="ssub">20 preguntas · ❤️ 3 vidas · ⏱ 20 seg · 🔥 Rachas · opciones aleatorizadas</div></div>
+<div class="gw" id="gwrap">
+  <div class="gstr" id="gstr">🔥 Racha: 0</div>
+  <div class="qhud">
+    <div class="qlv" id="glv"><span class="qlf">❤️</span><span class="qlf">❤️</span><span class="qlf">❤️</span></div>
+    <div class="qsc" id="gsc">0 pts</div>
+    <div class="qtm" id="gtm">⏱ 20s</div>
+  </div>
+  <div id="gcnt" style="flex:1;display:flex;flex-direction:column;overflow:hidden;"></div>
+</div>`,()=>initGame());
+
+// SIMULACRO
+addS('s51','🏆 Simulacro ICFES Final','🏆','Evaluación Final y Cierre',`
+<div class="sh"><div class="stit">🏆 Simulacro ICFES Final · Saber 11°</div>
+<div class="ssub">20 preguntas · formato oficial · sin límite de tiempo · reporte por competencia</div></div>
+<div id="smar" style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
+  <div class="simstart">
+    <div style="font-family:'Orbitron',sans-serif;font-size:15px;color:var(--f2);margin-bottom:7px;">SIMULACRO TERMODINÁMICA</div>
+    <p style="font-size:12px;color:var(--mu);line-height:1.7;max-width:370px;margin:0 auto;">20 preguntas · Formato real Saber 11° · Reporte final por competencia ICFES.</p>
+    <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:11px 0;">
+      <div style="text-align:center;"><div style="font-size:18px;font-weight:800;color:var(--f);">20</div><div style="font-size:10px;color:var(--mu);">Preguntas</div></div>
+      <div style="text-align:center;"><div style="font-size:18px;font-weight:800;color:var(--ye);">∞</div><div style="font-size:10px;color:var(--mu);">Sin límite</div></div>
+      <div style="text-align:center;"><div style="font-size:18px;font-weight:800;color:var(--gn);">3</div><div style="font-size:10px;color:var(--mu);">Competencias</div></div>
+    </div>
+    <button class="sbtn" onclick="startSim()">🚀 Iniciar Simulacro</button>
+  </div>
+</div>`);
+// ══ ORDEN CORRECTO DE PANTALLAS ══
+// Reordenar: la función addS ya las añadió en el orden de las variables, pero
+// necesitamos insertar tests y checkpoints en el lugar correcto entre las pantallas de contenido.
+// La solución: redefinimos SS con el orden correcto usando los IDs.
+(function reorder(){
+  const order=[
+    's01','s02',
+    's03','s04','s05','s06','t01','c01',
+    's09','s10','s11','t02','c02',
+    's14','s15','s16','t03','c03',
+    's19','s20','s21','s22','t04','c04',
+    's25','s26','s27','t05','c05','cT1',
+    's31',
+    's32','s33','s34','t06','c06',
+    's37','s38','s39','s40','t07','c07',
+    's43','s44','s45','t08','c08','cT2',
+    's49','s50','s51'
+  ];
+  const map={};SS.forEach(s=>map[s.id]=s);
+  SS.length=0;
+  order.forEach(id=>{if(map[id])SS.push(map[id]);});
+})();
+
+// ══ QUIZ ENGINE ══
+const QST={};const qTmrs={};
+function initQ(sid,rawQs,n,ul){
+  const qs=shufQ(rawQs).slice(0,n);
+  QST[sid]={qs,idx:0,sc:0,lv:ul?3:99,cor:0,ul};
+  renderQ(sid);
+}
+function renderQ(sid){
+  const st=QST[sid];
+  const box=document.getElementById('qw-'+sid);
+  if(!box)return;
+  if(st.idx>=st.qs.length){showQR(sid);return;}
+  const q=st.qs[st.idx];const L='ABCD';
+  box.innerHTML=
+    (st.ul?`<div class="qhud"><div class="qlv" id="qlv-${sid}">${[0,1,2].map(i=>`<span class="qlf${i>=st.lv?' x':''}">❤️</span>`).join('')}</div><div class="qsc">${st.sc} pts</div><div class="qtm" id="qtm-${sid}">⏱ 30s</div></div>`:'')
+    +`<div class="qbox">
+        <div class="qnum">Pregunta ${st.idx+1} de ${st.qs.length}</div>
+        <div class="qctx">${q.c}</div>
+        <div class="qt">${q.q}</div>
+        <div class="qopts" id="qo-${sid}">${q.o.map((o,i)=>`<button class="qopt" onclick="ansQ('${sid}',${i})"><span class="ol">${L[i]}</span><span>${o}</span></button>`).join('')}</div>
+        <div class="qfb" id="qfb-${sid}"></div>
+        <button class="qnx" id="qnx-${sid}" onclick="nxQ('${sid}')">${st.idx<st.qs.length-1?'Siguiente →':'Ver resultado ✓'}</button>
+      </div>`;
+  if(st.ul)stQT(sid);
+}
+function stQT(sid){
+  clearInterval(qTmrs[sid]);let t=30;
+  const el=()=>document.getElementById('qtm-'+sid);
+  if(el())el().className='qtm';
+  qTmrs[sid]=setInterval(()=>{
+    t--;if(!el())return;
+    el().textContent='⏱ '+t+'s';
+    if(t<=10){el().classList.add('hot');if(t>0)snd('tick');}
+    if(t<=0){
+      clearInterval(qTmrs[sid]);
+      const st=QST[sid];const q=st.qs[st.idx];
+      st.lv--;snd('bad');upQL(sid);
+      document.querySelectorAll(`#qo-${sid} .qopt`).forEach((b,i)=>{b.disabled=true;if(i===q.a)b.classList.add('ok');});
+      const fb=document.getElementById('qfb-'+sid);
+      if(fb){fb.className='qfb on bad';fb.textContent='⏱ ¡Tiempo! '+q.f;}
+      const nx=document.getElementById('qnx-'+sid);if(nx)nx.style.display='inline-block';
+    }
+  },1000);
+}
+function ansQ(sid,c){
+  clearInterval(qTmrs[sid]);
+  const st=QST[sid];const q=st.qs[st.idx];
+  document.querySelectorAll(`#qo-${sid} .qopt`).forEach(b=>b.disabled=true);
+  const btns=document.querySelectorAll(`#qo-${sid} .qopt`);
+  if(c===q.a){btns[c].classList.add('ok');st.sc+=100;st.cor++;snd('ok');}
+  else{btns[c].classList.add('bad');btns[q.a].classList.add('ok');if(st.ul)st.lv--;snd('bad');}
+  if(st.ul)upQL(sid);
+  const fb=document.getElementById('qfb-'+sid);
+  fb.className='qfb on '+(c===q.a?'ok':'bad');
+  fb.textContent=(c===q.a?'✅ ¡Correcto! ':'❌ Incorrecto. ')+(q.f||'');
+  document.getElementById('qnx-'+sid).style.display='inline-block';
+}
+function upQL(sid){
+  const el=document.getElementById('qlv-'+sid);if(!el)return;
+  el.innerHTML=[0,1,2].map(i=>`<span class="qlf${i>=QST[sid].lv?' x':''}">❤️</span>`).join('');
+}
+function nxQ(sid){clearInterval(qTmrs[sid]);QST[sid].idx++;renderQ(sid);}
+function showQR(sid){
+  clearInterval(qTmrs[sid]);
+  const st=QST[sid];const box=document.getElementById('qw-'+sid);if(!box)return;
+  const ok=st.cor>=Math.ceil(st.qs.length*.6);
+  snd(ok?'win':'lose');
+  box.innerHTML=`<div class="qres">
+    <div style="font-size:36px;">${st.cor===st.qs.length?'🌟':ok?'✅':'📖'}</div>
+    <div class="big" style="color:${ok?'var(--gn)':'var(--f)'};">${st.cor} / ${st.qs.length}</div>
+    <div class="msg">${ok?'¡Excelente! Dominas este tema.':'Repasa el contenido e inténtalo de nuevo.'}</div>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:9px 0;">
+      <div style="background:var(--cd);border:1px solid var(--br);border-radius:9px;padding:7px 12px;text-align:center;">
+        <div style="font-size:16px;font-weight:800;">${st.sc}</div><div style="font-size:9px;color:var(--mu);">puntos</div>
+      </div>
+      ${st.ul?`<div style="background:var(--cd);border:1px solid var(--br);border-radius:9px;padding:7px 12px;text-align:center;"><div style="font-size:16px;font-weight:800;">${st.lv}</div><div style="font-size:9px;color:var(--mu);">vidas</div></div>`:''}
+    </div>
+    <button class="btnr" style="background:linear-gradient(135deg,var(--f),var(--f2));" onclick="initQ('${sid}',QST['${sid}'].qs,${st.qs.length},${st.ul})">🔄 Repetir</button>
+    ${ok?`<button class="btnr" style="background:linear-gradient(135deg,var(--gn),#00a86b);" onclick="go(1)">Continuar →</button>`:''}
+  </div>`;
+}
+
+// ══ GAME ENGINE ══
+const GS={i:0,s:0,lv:3,k:0,tm:null,rdy:false,qs:[]};
+function initGame(){
+  if(GS.rdy)return;GS.rdy=true;
+  Object.assign(GS,{i:0,s:0,lv:3,k:0,qs:shufQ([...GQ])});
+  renderGQ();
+}
+function updGH(){
+  const e=id=>document.getElementById(id);
+  if(e('glv'))e('glv').innerHTML=[0,1,2].map(i=>`<span class="qlf${i>=GS.lv?' x':''}">❤️</span>`).join('');
+  if(e('gsc'))e('gsc').textContent=GS.s+' pts';
+  if(e('gstr'))e('gstr').textContent='🔥 Racha: '+GS.k;
+}
+function renderGQ(){
+  updGH();
+  if(GS.i>=GS.qs.length||GS.lv<=0){showGR();return;}
+  const q=GS.qs[GS.i];
+  const gc=document.getElementById('gcnt');if(!gc)return;
+  gc.innerHTML=`<div class="qnum">Pregunta ${GS.i+1} de ${GS.qs.length}</div>
+    <div class="qctx">${q.c}</div>
+    <div class="qt">${q.q}</div>
+    <div class="qopts" id="go">${q.o.map((o,i)=>`<button class="qopt" onclick="ansG(${i})"><span class="ol">${'ABCD'[i]}</span><span>${o}</span></button>`).join('')}</div>
+    <div class="qfb" id="gf"></div>
+    <button class="qnx" id="gnx" style="display:none;" onclick="GS.i++;renderGQ()">Siguiente →</button>`;
+  stGT();
+}
+function stGT(){
+  clearInterval(GS.tm);let t=20;
+  const el=()=>document.getElementById('gtm');
+  if(el())el().className='qtm';
+  GS.tm=setInterval(()=>{
+    t--;if(!el())return;
+    el().textContent='⏱ '+t+'s';
+    if(t<=7){el().classList.add('hot');if(t>0)snd('tick');}
+    if(t<=0){
+      clearInterval(GS.tm);GS.lv--;GS.k=0;snd('bad');updGH();
+      const q=GS.qs[GS.i];
+      document.querySelectorAll('#go .qopt').forEach((b,i)=>{b.disabled=true;if(i===q.a)b.classList.add('ok');});
+      const gf=document.getElementById('gf');if(gf){gf.className='qfb on bad';gf.textContent='⏱ ¡Tiempo!';}
+      const gnx=document.getElementById('gnx');if(gnx)gnx.style.display='inline-block';
+      if(GS.lv<=0)setTimeout(showGR,1200);
+    }
+  },1000);
+}
+function ansG(c){
+  clearInterval(GS.tm);
+  const q=GS.qs[GS.i];
+  document.querySelectorAll('#go .qopt').forEach(b=>b.disabled=true);
+  const btns=document.querySelectorAll('#go .qopt');
+  if(c===q.a){btns[c].classList.add('ok');GS.k++;const bon=GS.k>=3?50:0;GS.s+=100+bon;snd('ok');}
+  else{btns[c].classList.add('bad');btns[q.a].classList.add('ok');GS.lv--;GS.k=0;snd('bad');}
+  updGH();
+  const gf=document.getElementById('gf');
+  if(gf){gf.className='qfb on '+(c===q.a?'ok':'bad');gf.textContent=c===q.a?'✅ ¡Correcto!'+(GS.k>=3?' 🔥 ¡Racha!':''):'❌ Incorrecto.';}
+  const gnx=document.getElementById('gnx');if(gnx)gnx.style.display='inline-block';
+}
+function showGR(){
+  clearInterval(GS.tm);const gc=document.getElementById('gcnt');if(!gc)return;
+  const ok=GS.lv>0;snd(ok?'win':'lose');
+  gc.innerHTML=`<div class="qres">
+    <div style="font-size:42px;">${ok?'🏆':'💔'}</div>
+    <div class="big" style="color:${ok?'var(--ye)':'var(--f)'};">${GS.s} pts</div>
+    <div class="msg">${ok?'¡Excelente! Listo para el ICFES.':'¡Se agotaron las vidas! Repasa y vuelve.'}</div>
+    <div style="display:flex;gap:8px;justify-content:center;margin:9px 0;">
+      <div style="background:var(--cd);border:1px solid var(--br);border-radius:9px;padding:7px 12px;text-align:center;"><div style="font-size:16px;font-weight:800;">${GS.i}</div><div style="font-size:9px;color:var(--mu);">respondidas</div></div>
+      <div style="background:var(--cd);border:1px solid var(--br);border-radius:9px;padding:7px 12px;text-align:center;"><div style="font-size:16px;font-weight:800;">${GS.lv}</div><div style="font-size:9px;color:var(--mu);">vidas</div></div>
+    </div>
+    <button class="btnr" style="background:linear-gradient(135deg,var(--f),var(--f2));" onclick="GS.rdy=false;initGame()">🔄 Jugar de nuevo</button>
+  </div>`;
+}
+
+// ══ SIMULACRO ENGINE ══
+let SIM={i:0,ans:[],qs:[]};
+function startSim(){
+  SIM={i:0,ans:[],qs:shufQ([...SIMQ])};renderSimQ();
+}
+function renderSimQ(){
+  const ar=document.getElementById('smar');if(!ar)return;
+  if(SIM.i>=SIM.qs.length){showSimR();return;}
+  const q=SIM.qs[SIM.i];
+  ar.innerHTML=`<div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:9px;flex-shrink:0;">
+    <div style="background:rgba(255,214,10,.15);border:1px solid rgba(255,214,10,.3);border-radius:6px;padding:2px 10px;font-size:11px;font-weight:800;color:var(--ye);">Pregunta ${SIM.i+1} de ${SIM.qs.length}</div>
+    <div style="background:rgba(0,201,255,.1);border:1px solid rgba(0,201,255,.2);border-radius:6px;padding:2px 10px;font-size:10px;color:var(--ic);">${q.comp}</div>
+  </div>
+  <div class="qbox">
+    <div class="qctx">${q.c}</div>
+    <div class="qt">${q.q||''}</div>
+    <div class="qopts" id="simo">${q.o.map((o,i)=>`<button class="qopt" onclick="ansim(${i})"><span class="ol">${'ABCD'[i]}</span><span>${o}</span></button>`).join('')}</div>
+    <div class="qfb" id="simf"></div>
+    <button class="qnx" id="simnx" style="display:none;" onclick="SIM.i++;renderSimQ()">${SIM.i<SIM.qs.length-1?'Siguiente →':'Ver resultados 🏆'}</button>
+  </div>`;
+}
+function ansim(c){
+  const q=SIM.qs[SIM.i];
+  document.querySelectorAll('#simo .qopt').forEach(b=>b.disabled=true);
+  const btns=document.querySelectorAll('#simo .qopt');
+  btns[q.a].classList.add('ok');if(c!==q.a)btns[c].classList.add('bad');
+  SIM.ans.push({ok:c===q.a,comp:q.comp});
+  const fb=document.getElementById('simf');
+  fb.className='qfb on '+(c===q.a?'ok':'bad');
+  fb.textContent=(c===q.a?'✅ Correcto · ':'❌ Incorrecto · ')+'Competencia: '+q.comp;
+  document.getElementById('simnx').style.display='inline-block';
+  snd(c===q.a?'ok':'bad');
+}
+function showSimR(){
+  const ar=document.getElementById('smar');
+  const total=SIM.ans.length,cor=SIM.ans.filter(a=>a.ok).length,pct=Math.round(cor/total*100);
+  const byC={};SIM.ans.forEach(a=>{if(!byC[a.comp])byC[a.comp]={c:0,t:0};byC[a.comp].t++;if(a.ok)byC[a.comp].c++;});
+  const lv=pct>=80?{l:'Nivel Avanzado',c:'var(--gn)',e:'¡Excelente dominio del tema!'}:pct>=60?{l:'Nivel Satisfactorio',c:'var(--ye)',e:'Buen desempeño. Refuerza donde fallaste.'}:{l:'Nivel Mínimo',c:'var(--f)',e:'Repasa el curso completo antes del ICFES.'};
+  snd(pct>=60?'win':'lose');
+  ar.innerHTML=`<div style="text-align:center;padding:12px 8px;">
+    <div style="font-size:40px;margin-bottom:6px;">${pct>=80?'🏆':pct>=60?'🎯':'📚'}</div>
+    <div style="font-family:'Orbitron',sans-serif;font-size:22px;font-weight:900;color:${lv.c};margin-bottom:3px;">${cor} / ${total} · ${pct}%</div>
+    <div style="font-size:13px;font-weight:800;color:${lv.c};margin-bottom:5px;">${lv.l}</div>
+    <div style="font-size:11px;color:var(--mu);margin-bottom:11px;">${lv.e}</div>
+    <div style="display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin:9px 0;">
+      ${Object.entries(byC).map(([comp,d])=>`
+        <div style="background:var(--cd);border:1px solid var(--br);border-radius:10px;padding:8px 11px;min-width:120px;text-align:center;">
+          <div style="font-size:9px;color:var(--mu);margin-bottom:2px;">${comp}</div>
+          <div style="font-size:17px;font-weight:800;color:${d.c/d.t>=.6?'var(--gn)':'var(--f)'};">${d.c} / ${d.t}</div>
+          <div style="font-size:9px;color:var(--mu);">${Math.round(d.c/d.t*100)}%</div>
+        </div>`).join('')}
+    </div>
+    <button class="btnr" style="background:linear-gradient(135deg,var(--f),var(--f2));" onclick="startSim()">🔄 Repetir</button>
+    <button class="btnr" style="background:linear-gradient(135deg,#0077B6,var(--ic));" onclick="goTo('s01')">📖 Inicio</button>
+  </div>`;
+}
+
+// ══ NAVEGACIÓN ══
+function buildSB(){
+  let h='',lg='';
+  SS.forEach((s,i)=>{
+    if(s.gr!==lg){h+=`<div class="sbg">${s.gr}</div>`;lg=s.gr;}
+    h+=`<div class="sbi${i===ci?' on':''}" id="sb${i}" onclick="gotoI(${i});cSB();">
+      <span style="font-size:13px;width:18px;flex-shrink:0;">${s.ic}</span>
+      <span style="flex:1;line-height:1.3;">${s.lb}</span>
+      ${s.done?'<span class="sbck">✓</span>':''}
+    </div>`;
+  });
+  document.getElementById('sbc').innerHTML=h;
+}
+function buildSC(){
+  document.getElementById('scc').innerHTML=SS.map((s,i)=>
+    `<div class="sc${i===0?' on':''}" id="sc${i}">${s.html}</div>`
+  ).join('');
+}
+function gotoI(idx){
+  if(idx<0||idx>=SS.length)return;
+  document.getElementById('sc'+ci)?.classList.remove('on');
+  ci=idx;
+  document.getElementById('sc'+idx)?.classList.add('on');
+  document.getElementById('sw').scrollTop=0;
+  SS[idx].done=true;
+  updNav();buildSB();updProg();
+  if(SS[idx].fn)setTimeout(()=>SS[idx].fn(),80);
+}
+function go(d){gotoI(ci+d);}
+function goTo(id){const i=SS.findIndex(s=>s.id===id);if(i>=0)gotoI(i);}
+function updNav(){
+  const s=SS[ci];
+  document.getElementById('tbt').textContent='🔥 '+s.lb;
+  document.getElementById('blb').textContent=(ci+1)+' / '+SS.length;
+  document.getElementById('bpv').disabled=ci===0;
+  const nb=document.getElementById('bnx');
+  nb.disabled=ci===SS.length-1;
+  nb.textContent=ci===SS.length-1?'✓ Completado':'Siguiente →';
+}
+function updProg(){
+  const d=SS.filter(s=>s.done).length,p=Math.round(d/SS.length*100);
+  document.getElementById('pi').style.width=p+'%';
+  document.getElementById('ptx').textContent=p+'%';
+}
+function tSB(){document.getElementById('sb').classList.toggle('on');document.getElementById('ov').classList.toggle('on');}
+function cSB(){document.getElementById('sb').classList.remove('on');document.getElementById('ov').classList.remove('on');}
+
+// ══ INIT ══
+buildSC();buildSB();updNav();updProg();SS[0].done=true;
+</script>
+</body>
+</html>
